@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hate Speech Guardian</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            padding: 20px;
+        }
+        .container {
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 40px;
+            width: 100%;
+            max-width: 800px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+        }
+        h1 { text-align: center; margin-bottom: 4px; font-size: 30px; }
+        .subtitle { text-align: center; color: rgba(255,255,255,0.5); margin-bottom: 6px; font-size: 13px; }
+        .badge-row { text-align: center; margin-bottom: 20px; }
+        .agent-badge {
+            display: inline-block; padding: 4px 10px; margin: 3px;
+            border-radius: 20px; font-size: 11px; font-weight: 600;
+            background: rgba(108,99,255,0.2); border: 1px solid rgba(108,99,255,0.4); color: #a5a0ff;
+        }
+
+        /* Tabs */
+        .tabs { display: flex; gap: 0; margin-bottom: 24px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .tab {
+            flex: 1; padding: 12px 0; text-align: center; font-size: 14px; font-weight: 600;
+            color: rgba(255,255,255,0.4); cursor: pointer; border-bottom: 2px solid transparent;
+            transition: all 0.2s;
+        }
+        .tab:hover { color: rgba(255,255,255,0.7); }
+        .tab.active { color: #a5a0ff; border-bottom-color: #6c63ff; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+
+        textarea {
+            width: 100%; height: 110px; padding: 15px;
+            border: 1px solid rgba(255,255,255,0.2); border-radius: 12px;
+            background: rgba(255,255,255,0.08); color: #fff;
+            font-size: 15px; resize: vertical; outline: none;
+        }
+        textarea:focus { border-color: #6c63ff; }
+        textarea::placeholder { color: rgba(255,255,255,0.35); }
+        .btn {
+            width: 100%; padding: 14px; margin-top: 18px;
+            border: none; border-radius: 12px;
+            background: linear-gradient(135deg, #6c63ff, #3f51b5);
+            color: #fff; font-size: 16px; font-weight: 600; cursor: pointer;
+            transition: box-shadow 0.2s;
+        }
+        .btn:hover { box-shadow: 0 4px 15px rgba(108,99,255,0.4); }
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .btn-secondary {
+            background: linear-gradient(135deg, #43a047, #2e7d32);
+        }
+        .btn-secondary:hover { box-shadow: 0 4px 15px rgba(76,175,80,0.4); }
+        .btn-rerun {
+            background: linear-gradient(135deg, #ff9800, #e65100);
+            width: auto; flex: 0; min-width: 140px; margin-top: 0;
+        }
+        .btn-rerun:hover { box-shadow: 0 4px 15px rgba(255,152,0,0.4); }
+
+        /* Output panels */
+        .output-area { margin-top: 25px; display: none; }
+        .output-area.visible { display: block; }
+        .panel {
+            background: rgba(0,0,0,0.35);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 14px;
+            padding: 20px;
+            margin-bottom: 14px;
+        }
+        .panel-title {
+            font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px;
+            color: rgba(255,255,255,0.35); margin-bottom: 12px;
+        }
+
+        /* Verdict */
+        .verdict-safe {
+            display: inline-block; padding: 8px 24px; border-radius: 30px;
+            font-size: 18px; font-weight: 700;
+            background: rgba(76,175,80,0.2); border: 2px solid #4caf50; color: #81c784;
+        }
+        .verdict-unsafe {
+            display: inline-block; padding: 8px 24px; border-radius: 30px;
+            font-size: 18px; font-weight: 700;
+            background: rgba(244,67,54,0.2); border: 2px solid #f44336; color: #e57373;
+        }
+
+        /* Analysis */
+        .meta-row { display: flex; gap: 12px; margin-bottom: 14px; flex-wrap: wrap; align-items: center; }
+        .category-tag {
+            padding: 5px 14px; border-radius: 20px; font-size: 13px; font-weight: 600;
+            background: rgba(255,152,0,0.2); border: 1px solid rgba(255,152,0,0.5); color: #ffb74d;
+        }
+        .sub-category-tag {
+            padding: 5px 14px; border-radius: 20px; font-size: 12px; font-weight: 500;
+            background: rgba(255,152,0,0.1); border: 1px solid rgba(255,152,0,0.3); color: #ffe0b2;
+        }
+        .target-tag {
+            padding: 5px 14px; border-radius: 20px; font-size: 13px; font-weight: 600;
+            background: rgba(244,67,54,0.15); border: 1px solid rgba(244,67,54,0.4); color: #ef9a9a;
+        }
+        .intent-tag {
+            padding: 5px 14px; border-radius: 20px; font-size: 13px; font-weight: 600;
+            background: rgba(156,39,176,0.2); border: 1px solid rgba(156,39,176,0.4); color: #ce93d8;
+        }
+        .severity-container { flex: 1; min-width: 180px; }
+        .severity-bar-bg {
+            height: 10px; border-radius: 5px; background: rgba(255,255,255,0.1); overflow: hidden;
+        }
+        .severity-bar-fill { height: 100%; border-radius: 5px; transition: width 0.6s ease; }
+        .severity-label { font-size: 12px; color: rgba(255,255,255,0.5); margin-bottom: 4px; }
+        .confidence-row {
+            display: flex; align-items: center; gap: 8px; margin-bottom: 10px;
+        }
+        .confidence-label { font-size: 12px; color: rgba(255,255,255,0.5); }
+        .confidence-bar-bg {
+            flex: 1; max-width: 120px; height: 6px; border-radius: 3px;
+            background: rgba(255,255,255,0.1); overflow: hidden;
+        }
+        .confidence-bar-fill { height: 100%; border-radius: 3px; background: #64b5f6; transition: width 0.6s ease; }
+        .toxic-words { margin-top: 10px; }
+        .toxic-word {
+            display: inline-block; padding: 3px 10px; margin: 3px;
+            border-radius: 15px; font-size: 13px; font-weight: 500;
+            background: rgba(244,67,54,0.2); border: 1px solid rgba(244,67,54,0.4); color: #ef9a9a;
+        }
+        .explanation {
+            margin-top: 12px; font-size: 14px; color: rgba(255,255,255,0.6);
+            line-height: 1.5; font-style: italic;
+        }
+
+        /* Rewrite */
+        .rewrite-text {
+            font-size: 15px; line-height: 1.6; color: #81d4fa;
+            padding: 14px; background: rgba(33,150,243,0.1);
+            border-radius: 10px; border-left: 3px solid #42a5f5;
+        }
+
+        /* Loading */
+        .progress { margin-top: 20px; display: none; }
+        .progress.active { display: block; }
+        .step {
+            padding: 8px 0; font-size: 14px; color: rgba(255,255,255,0.3);
+            display: flex; align-items: center; gap: 8px;
+        }
+        .step.active { color: rgba(255,255,255,0.8); }
+        .step.done { color: #81c784; }
+        .step-dot {
+            width: 8px; height: 8px; border-radius: 50%;
+            background: rgba(255,255,255,0.2); flex-shrink: 0;
+        }
+        .step.active .step-dot { background: #6c63ff; animation: pulse 1s infinite; }
+        .step.done .step-dot { background: #4caf50; }
+        @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+        .safe-msg { font-size: 15px; color: rgba(255,255,255,0.6); margin-top: 8px; }
+
+        /* ── Evals tab styles ── */
+        .eval-controls { display: flex; gap: 10px; margin-bottom: 16px; flex-wrap: wrap; }
+        .eval-controls select {
+            padding: 10px 14px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.08); color: #fff; font-size: 14px; outline: none;
+        }
+        .eval-controls select option { background: #1a1a2e; color: #fff; }
+        .eval-controls .btn { width: auto; flex: 1; min-width: 160px; margin-top: 0; }
+
+        .score-card-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px; margin-bottom: 18px; }
+        .score-card {
+            background: rgba(0,0,0,0.35); border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px; padding: 16px; text-align: center;
+        }
+        .score-card .sc-value { font-size: 28px; font-weight: 700; margin-bottom: 4px; }
+        .score-card .sc-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: rgba(255,255,255,0.4); }
+
+        .overall-score-panel {
+            text-align: center; padding: 24px; margin-bottom: 18px;
+            background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.1); border-radius: 14px;
+        }
+        .overall-score-panel .os-value { font-size: 52px; font-weight: 800; }
+        .overall-score-panel .os-label { font-size: 13px; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 1.5px; }
+
+        .eval-table { width: 100%; border-collapse: collapse; margin-top: 12px; }
+        .eval-table th, .eval-table td {
+            padding: 10px 8px; text-align: left; font-size: 13px;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+        .eval-table th {
+            font-size: 10px; text-transform: uppercase; letter-spacing: 1px;
+            color: rgba(255,255,255,0.35); font-weight: 600;
+        }
+        .eval-table td { color: rgba(255,255,255,0.7); }
+        .eval-table tr:hover td { background: rgba(255,255,255,0.03); }
+        .badge-pass { color: #81c784; font-weight: 600; }
+        .badge-fail { color: #e57373; font-weight: 600; }
+        .badge-skip { color: rgba(255,255,255,0.3); }
+        .eval-progress-bar {
+            width: 100%; height: 6px; border-radius: 3px;
+            background: rgba(255,255,255,0.1); overflow: hidden; margin-top: 10px;
+        }
+        .eval-progress-fill { height: 100%; border-radius: 3px; background: #6c63ff; transition: width 0.3s ease; width: 0%; }
+        .eval-status { font-size: 13px; color: rgba(255,255,255,0.5); margin-top: 8px; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Hate Speech Guardian</h1>
+    <p class="subtitle">Multi-Agent AI Content Moderation Pipeline</p>
+    <div class="badge-row">
+        <span class="agent-badge">Agent 1: Detector</span>
+        <span class="agent-badge">Agent 2: Analyzer</span>
+        <span class="agent-badge">Agent 3: Rewriter</span>
+    </div>
+
+    <!-- Tabs -->
+    <div class="tabs">
+        <div class="tab active" data-tab="analyze">Analyze</div>
+        <div class="tab" data-tab="analytics">Evals</div>
+    </div>
+
+    <!-- ═══ Analyze Tab ═══ -->
+    <div class="tab-content active" id="tab-analyze">
+        <textarea id="textInput" placeholder="Enter text to analyze for hate speech..."></textarea>
+        <button class="btn" id="analyzeBtn">Analyze Text</button>
+
+        <div class="progress" id="progress">
+            <div class="step" id="step1"><span class="step-dot"></span> Agent 1: Detecting hate speech...</div>
+            <div class="step" id="step2"><span class="step-dot"></span> Agent 2: Analyzing category &amp; severity...</div>
+            <div class="step" id="step3"><span class="step-dot"></span> Agent 3: Rewriting to respectful version...</div>
+        </div>
+
+        <div class="output-area" id="outputArea">
+            <div class="panel">
+                <div class="panel-title">Verdict</div>
+                <div id="verdictContent"></div>
+            </div>
+            <div class="panel" id="analysisPanel" style="display:none;">
+                <div class="panel-title">Analysis</div>
+                <div class="meta-row">
+                    <span class="category-tag" id="categoryTag"></span>
+                    <span class="sub-category-tag" id="subCategoryTag"></span>
+                    <span class="intent-tag" id="intentTag"></span>
+                </div>
+                <div class="meta-row">
+                    <div class="severity-container">
+                        <div class="severity-label">Severity: <span id="severityNum"></span>/10</div>
+                        <div class="severity-bar-bg"><div class="severity-bar-fill" id="severityBar"></div></div>
+                    </div>
+                </div>
+                <div class="confidence-row">
+                    <span class="confidence-label">Confidence: <span id="confidenceNum"></span>/10</span>
+                    <div class="confidence-bar-bg"><div class="confidence-bar-fill" id="confidenceBar"></div></div>
+                </div>
+                <div class="explanation" id="explanation"></div>
+            </div>
+            <div class="panel" id="rewritePanel" style="display:none;">
+                <div class="panel-title">Respectful Alternative</div>
+                <div class="rewrite-text" id="rewriteText"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══ Evals Tab ═══ -->
+    <div class="tab-content" id="tab-analytics">
+        <div class="eval-controls">
+            <select id="evalFilter">
+                <option value="quick">Quick Run (8 cases)</option>
+                <option value="all">All Cases (20)</option>
+                <option value="safe">Safe Only (5)</option>
+                <option value="unsafe">Unsafe Only (15)</option>
+            </select>
+            <button class="btn btn-secondary" id="runEvalsBtn">Run Evaluations</button>
+            <button class="btn btn-rerun" id="rerunFailsBtn" style="display:none;">Rerun Failures</button>
+        </div>
+
+        <div id="evalRunning" style="display:none;">
+            <div class="eval-progress-bar"><div class="eval-progress-fill" id="evalProgressFill"></div></div>
+            <div class="eval-status" id="evalStatus">Starting evaluations...</div>
+        </div>
+
+        <div id="evalResults" style="display:none;">
+            <div class="overall-score-panel">
+                <div class="os-label">Overall Score</div>
+                <div class="os-value" id="overallScore">—</div>
+            </div>
+
+            <div class="score-card-row">
+                <div class="score-card">
+                    <div class="sc-value" id="scVerdict">—</div>
+                    <div class="sc-label">Verdict</div>
+                </div>
+                <div class="score-card">
+                    <div class="sc-value" id="scCategory">—</div>
+                    <div class="sc-label">Category</div>
+                </div>
+                <div class="score-card">
+                    <div class="sc-value" id="scSeverity">—</div>
+                    <div class="sc-label">Severity</div>
+                </div>
+                <div class="score-card">
+                    <div class="sc-value" id="scJson">—</div>
+                    <div class="sc-label">JSON Valid</div>
+                </div>
+                <div class="score-card">
+                    <div class="sc-value" id="scRewrite">—</div>
+                    <div class="sc-label">Rewrite</div>
+                </div>
+            </div>
+
+            <div class="panel" style="overflow-x:auto;">
+                <div class="panel-title">Per-Case Results</div>
+                <table class="eval-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Text</th>
+                            <th>Expected</th>
+                            <th>Verdict</th>
+                            <th>Category</th>
+                            <th>Severity</th>
+                            <th>Time</th>
+                        </tr>
+                    </thead>
+                    <tbody id="evalTableBody"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+/* ── Tab switching ── */
+document.querySelectorAll('.tab').forEach(function(tab) {
+    tab.addEventListener('click', function() {
+        document.querySelectorAll('.tab').forEach(function(t) { t.classList.remove('active'); });
+        document.querySelectorAll('.tab-content').forEach(function(c) { c.classList.remove('active'); });
+        tab.classList.add('active');
+        document.getElementById('tab-' + tab.dataset.tab).classList.add('active');
+    });
+});
+
+/* ── Analyze tab ── */
+document.getElementById('analyzeBtn').addEventListener('click', function() {
+    var text = document.getElementById('textInput').value.trim();
+    var btn = this;
+    var progress = document.getElementById('progress');
+    var outputArea = document.getElementById('outputArea');
+
+    if (!text) return;
+
+    btn.disabled = true;
+    btn.textContent = 'Analyzing...';
+    outputArea.classList.remove('visible');
+    progress.classList.add('active');
+
+    var steps = ['step1','step2','step3'];
+    steps.forEach(function(s) { document.getElementById(s).className = 'step'; });
+    document.getElementById('step1').classList.add('active');
+
+    var stepTimer1 = setTimeout(function() {
+        document.getElementById('step1').classList.remove('active');
+        document.getElementById('step1').classList.add('done');
+        document.getElementById('step2').classList.add('active');
+    }, 8000);
+
+    var stepTimer2 = setTimeout(function() {
+        document.getElementById('step2').classList.remove('active');
+        document.getElementById('step2').classList.add('done');
+        document.getElementById('step3').classList.add('active');
+    }, 20000);
+
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', '/analyze', true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.timeout = 180000;
+
+    xhr.onload = function() {
+        clearTimeout(stepTimer1);
+        clearTimeout(stepTimer2);
+        btn.disabled = false;
+        btn.textContent = 'Analyze Text';
+        progress.classList.remove('active');
+        try {
+            var data = JSON.parse(xhr.responseText);
+            if (xhr.status === 200) { renderResult(data); }
+            else { alert('Error: ' + (data.error || 'Unknown error')); }
+        } catch(e) { alert('Error parsing response'); }
+    };
+    xhr.onerror = function() {
+        clearTimeout(stepTimer1); clearTimeout(stepTimer2);
+        btn.disabled = false; btn.textContent = 'Analyze Text';
+        progress.classList.remove('active'); alert('Network error');
+    };
+    xhr.ontimeout = function() {
+        clearTimeout(stepTimer1); clearTimeout(stepTimer2);
+        btn.disabled = false; btn.textContent = 'Analyze Text';
+        progress.classList.remove('active'); alert('Request timed out. Try again.');
+    };
+    xhr.send('text=' + encodeURIComponent(text));
+});
+
+function renderResult(data) {
+    var outputArea = document.getElementById('outputArea');
+    var verdictContent = document.getElementById('verdictContent');
+    var analysisPanel = document.getElementById('analysisPanel');
+    var rewritePanel = document.getElementById('rewritePanel');
+
+    if (data.verdict === 'safe') {
+        verdictContent.innerHTML = '<span class="verdict-safe">SAFE</span>' +
+            '<p class="safe-msg">No hate speech or offensive language detected. This text is clean.</p>';
+        analysisPanel.style.display = 'none';
+        rewritePanel.style.display = 'none';
+    } else {
+        verdictContent.innerHTML = '<span class="verdict-unsafe">HATE SPEECH DETECTED</span>';
+        analysisPanel.style.display = 'block';
+        rewritePanel.style.display = 'block';
+        document.getElementById('categoryTag').textContent = data.category || 'unknown';
+
+        var subCat = document.getElementById('subCategoryTag');
+        if (data.sub_category) { subCat.textContent = data.sub_category; subCat.style.display = 'inline-block'; }
+        else { subCat.style.display = 'none'; }
+
+        var intentTag = document.getElementById('intentTag');
+        if (data.intent) { intentTag.textContent = data.intent; intentTag.style.display = 'inline-block'; }
+        else { intentTag.style.display = 'none'; }
+
+        var sev = parseInt(data.severity) || 5;
+        document.getElementById('severityNum').textContent = sev;
+        var bar = document.getElementById('severityBar');
+        bar.style.width = (sev * 10) + '%';
+        if (sev <= 3) bar.style.background = '#4caf50';
+        else if (sev <= 6) bar.style.background = '#ff9800';
+        else bar.style.background = '#f44336';
+
+        var conf = parseInt(data.confidence) || 5;
+        document.getElementById('confidenceNum').textContent = conf;
+        document.getElementById('confidenceBar').style.width = (conf * 10) + '%';
+
+        document.getElementById('explanation').textContent = data.explanation || '';
+        document.getElementById('rewriteText').textContent = data.rewritten_text || '';
+    }
+    outputArea.classList.add('visible');
+}
+
+/* ── Evals tab ── */
+document.getElementById('runEvalsBtn').addEventListener('click', function() {
+    var btn = this;
+    var filter = document.getElementById('evalFilter').value;
+    btn.disabled = true;
+    btn.textContent = 'Running...';
+    document.getElementById('evalRunning').style.display = 'block';
+    document.getElementById('evalResults').style.display = 'none';
+    document.getElementById('evalProgressFill').style.width = '0%';
+    document.getElementById('evalStatus').textContent = 'Starting evaluations...';
+
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', '/run-evals', true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.timeout = 600000;
+
+    var pollId = setInterval(function() {
+        var pxhr = new XMLHttpRequest();
+        pxhr.open('GET', '/eval-progress', true);
+        pxhr.onload = function() {
+            try {
+                var p = JSON.parse(pxhr.responseText);
+                var pct = p.total > 0 ? Math.round((p.done / p.total) * 100) : 0;
+                document.getElementById('evalProgressFill').style.width = pct + '%';
+                document.getElementById('evalStatus').textContent =
+                    'Running case ' + p.done + ' of ' + p.total +
+                    (p.current_text ? ' \u2014 "' + p.current_text.substring(0, 50) + '..."' : '');
+            } catch(e) {}
+        };
+        pxhr.send();
+    }, 2000);
+
+    xhr.onload = function() {
+        clearInterval(pollId);
+        btn.disabled = false;
+        btn.textContent = 'Run Evaluations';
+        document.getElementById('evalRunning').style.display = 'none';
+        try {
+            var data = JSON.parse(xhr.responseText);
+            if (xhr.status === 200) { renderEvalResults(data); }
+            else { alert('Eval error: ' + (data.error || 'Unknown')); }
+        } catch(e) { alert('Error parsing eval results'); }
+    };
+    xhr.onerror = function() {
+        clearInterval(pollId); btn.disabled = false; btn.textContent = 'Run Evaluations';
+        document.getElementById('evalRunning').style.display = 'none'; alert('Network error');
+    };
+    xhr.ontimeout = function() {
+        clearInterval(pollId); btn.disabled = false; btn.textContent = 'Run Evaluations';
+        document.getElementById('evalRunning').style.display = 'none'; alert('Eval timed out.');
+    };
+    xhr.send('filter=' + encodeURIComponent(filter));
+});
+
+function scoreColor(pct) {
+    if (pct >= 80) return '#81c784';
+    if (pct >= 60) return '#ffb74d';
+    return '#e57373';
+}
+
+/* Track failed case IDs for rerun */
+var _failedIds = [];
+
+function renderEvalResults(data) {
+    document.getElementById('evalResults').style.display = 'block';
+
+    var os = data.overall_score;
+    var osEl = document.getElementById('overallScore');
+    osEl.textContent = os.toFixed(1) + '%';
+    osEl.style.color = scoreColor(os);
+
+    function setCard(id, passed, total) {
+        var el = document.getElementById(id);
+        if (total === 0) { el.textContent = 'N/A'; el.style.color = 'rgba(255,255,255,0.3)'; return; }
+        el.textContent = passed + '/' + total;
+        el.style.color = scoreColor((passed / total) * 100);
+    }
+    setCard('scVerdict',  data.metrics.verdict_passed,  data.metrics.verdict_total);
+    setCard('scCategory', data.metrics.category_passed, data.metrics.category_total);
+    setCard('scSeverity', data.metrics.severity_passed, data.metrics.severity_total);
+    setCard('scJson',     data.metrics.json_passed,     data.metrics.json_total);
+    setCard('scRewrite',  data.metrics.rewrite_passed,  data.metrics.rewrite_total);
+
+    _failedIds = [];
+    var tbody = document.getElementById('evalTableBody');
+    tbody.innerHTML = '';
+    data.results.forEach(function(r) {
+        var hasFail = !r.verdict_correct ||
+            (r.category_correct !== null && !r.category_correct) ||
+            (r.severity_in_range !== null && !r.severity_in_range) ||
+            !r.json_valid ||
+            (r.rewrite_ok !== null && !r.rewrite_ok);
+        if (hasFail) _failedIds.push(r.id);
+
+        var tr = document.createElement('tr');
+        var verdict_cls = r.verdict_correct ? 'badge-pass' : 'badge-fail';
+        var verdict_txt = r.verdict_correct ? 'PASS' : 'FAIL';
+        var cat_cls = r.category_correct === null ? 'badge-skip' : (r.category_correct ? 'badge-pass' : 'badge-fail');
+        var cat_txt = r.category_correct === null ? '\u2014' : (r.category_correct ? 'PASS' : 'FAIL');
+        var sev_cls = r.severity_in_range === null ? 'badge-skip' : (r.severity_in_range ? 'badge-pass' : 'badge-fail');
+        var sev_txt = r.severity_in_range === null ? '\u2014' : (r.severity_in_range ? 'PASS' : 'FAIL');
+        tr.innerHTML =
+            '<td>' + r.id + '</td>' +
+            '<td style="max-width:220px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" title="' +
+                r.text.replace(/"/g,'&quot;') + '">' + r.text.substring(0,50) + (r.text.length > 50 ? '...' : '') + '</td>' +
+            '<td>' + r.expected_verdict + '</td>' +
+            '<td class="' + verdict_cls + '">' + verdict_txt + '</td>' +
+            '<td class="' + cat_cls + '">' + cat_txt + '</td>' +
+            '<td class="' + sev_cls + '">' + sev_txt + '</td>' +
+            '<td>' + (r.elapsed ? r.elapsed.toFixed(1) + 's' : '\u2014') + '</td>';
+        tbody.appendChild(tr);
+    });
+
+    /* Show/hide Rerun Failures button */
+    var rerunBtn = document.getElementById('rerunFailsBtn');
+    if (_failedIds.length > 0 && _failedIds.length < data.results.length) {
+        rerunBtn.textContent = 'Rerun ' + _failedIds.length + ' Failure' + (_failedIds.length > 1 ? 's' : '');
+        rerunBtn.style.display = 'inline-block';
+    } else {
+        rerunBtn.style.display = 'none';
+    }
+}
+
+/* ── Rerun Failures ── */
+document.getElementById('rerunFailsBtn').addEventListener('click', function() {
+    if (_failedIds.length === 0) return;
+    var btn = this;
+    var runBtn = document.getElementById('runEvalsBtn');
+    btn.disabled = true;
+    runBtn.disabled = true;
+    btn.textContent = 'Running...';
+    document.getElementById('evalRunning').style.display = 'block';
+    document.getElementById('evalProgressFill').style.width = '0%';
+    document.getElementById('evalStatus').textContent = 'Rerunning ' + _failedIds.length + ' failed case(s)...';
+
+    var pollId = setInterval(function() {
+        var pxhr = new XMLHttpRequest();
+        pxhr.open('GET', '/eval-progress', true);
+        pxhr.onload = function() {
+            try {
+                var p = JSON.parse(pxhr.responseText);
+                var pct = p.total > 0 ? Math.round((p.done / p.total) * 100) : 0;
+                document.getElementById('evalProgressFill').style.width = pct + '%';
+                document.getElementById('evalStatus').textContent =
+                    'Rerunning case ' + p.done + ' of ' + p.total +
+                    (p.current_text ? ' \u2014 "' + p.current_text.substring(0, 50) + '..."' : '');
+            } catch(e) {}
+        };
+        pxhr.send();
+    }, 2000);
+
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', '/run-evals', true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.timeout = 600000;
+    xhr.onload = function() {
+        clearInterval(pollId);
+        btn.disabled = false; runBtn.disabled = false;
+        btn.textContent = 'Rerun Failures';
+        document.getElementById('evalRunning').style.display = 'none';
+        try {
+            var data = JSON.parse(xhr.responseText);
+            if (xhr.status === 200) { renderEvalResults(data); }
+            else { alert('Eval error: ' + (data.error || 'Unknown')); }
+        } catch(e) { alert('Error parsing eval results'); }
+    };
+    xhr.onerror = function() {
+        clearInterval(pollId); btn.disabled = false; runBtn.disabled = false;
+        btn.textContent = 'Rerun Failures';
+        document.getElementById('evalRunning').style.display = 'none'; alert('Network error');
+    };
+    xhr.ontimeout = function() {
+        clearInterval(pollId); btn.disabled = false; runBtn.disabled = false;
+        btn.textContent = 'Rerun Failures';
+        document.getElementById('evalRunning').style.display = 'none'; alert('Eval timed out.');
+    };
+    xhr.send('ids=' + encodeURIComponent(_failedIds.join(',')));
+});
+</script>
+</body>
+</html>
