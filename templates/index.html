@@ -214,6 +214,243 @@
         }
         .eval-progress-fill { height: 100%; border-radius: 3px; background: #6c63ff; transition: width 0.3s ease; width: 0%; }
         .eval-status { font-size: 13px; color: rgba(255,255,255,0.5); margin-top: 8px; }
+
+        /* ── Agent Report Cards ── */
+        .agent-reports { margin-top: 22px; }
+        .agent-reports-title {
+            font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px;
+            color: rgba(255,255,255,0.35); margin-bottom: 14px;
+        }
+        .agent-report-card {
+            background: rgba(0,0,0,0.35); border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 14px; padding: 18px 20px; margin-bottom: 14px;
+        }
+        .agent-report-card.all-pass { border-color: rgba(76,175,80,0.3); }
+        .agent-report-card.has-fail { border-color: rgba(244,67,54,0.25); }
+        .arc-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .arc-name { font-size: 15px; font-weight: 700; color: #fff; }
+        .arc-role { font-size: 11px; color: rgba(255,255,255,0.35); margin-top: 2px; }
+        .arc-score { font-size: 24px; font-weight: 800; }
+        .arc-metrics { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 10px; }
+        .arc-metric {
+            font-size: 12px; color: rgba(255,255,255,0.55);
+        }
+        .arc-metric-val { font-weight: 700; font-size: 14px; }
+        .arc-metric-val.good { color: #81c784; }
+        .arc-metric-val.warn { color: #ffb74d; }
+        .arc-metric-val.bad { color: #e57373; }
+        .arc-failures { margin-top: 10px; }
+        .arc-failures-title {
+            font-size: 11px; text-transform: uppercase; letter-spacing: 1px;
+            color: rgba(244,67,54,0.7); margin-bottom: 8px; font-weight: 600;
+        }
+        .arc-fail-item {
+            font-size: 12px; color: rgba(255,255,255,0.5); padding: 6px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+            display: flex; gap: 8px; align-items: baseline;
+        }
+        .arc-fail-id { color: rgba(255,255,255,0.3); font-weight: 600; min-width: 28px; }
+        .arc-fail-issue {
+            display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 10px;
+            background: rgba(244,67,54,0.15); color: #e57373; font-weight: 600; white-space: nowrap;
+        }
+        .arc-fail-text { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+        /* ── Deep Analysis Styles ── */
+        .deep-analysis { margin-top: 22px; }
+        .deep-analysis-title {
+            font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px;
+            color: rgba(255,255,255,0.35); margin-bottom: 14px;
+        }
+        .da-summary-panel {
+            background: rgba(0,0,0,0.4); border: 1px solid rgba(108,99,255,0.3);
+            border-radius: 14px; padding: 20px; margin-bottom: 18px;
+        }
+        .da-summary-text { font-size: 14px; line-height: 1.6; color: rgba(255,255,255,0.75); }
+        .da-section { margin-bottom: 18px; }
+        .da-section-title {
+            font-size: 13px; font-weight: 700; color: #a5a0ff; margin-bottom: 10px;
+            display: flex; align-items: center; gap: 8px;
+        }
+        .da-section-title .da-count {
+            font-size: 10px; padding: 2px 8px; border-radius: 10px;
+            background: rgba(108,99,255,0.2); color: #ccc8ff;
+        }
+
+        /* Failure pattern cards */
+        .da-pattern-card {
+            background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 12px; padding: 16px; margin-bottom: 10px;
+        }
+        .da-pattern-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+        .da-pattern-type {
+            font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 8px;
+        }
+        .da-pattern-type.fp { background: rgba(255,152,0,0.2); color: #ffb74d; }
+        .da-pattern-type.fn { background: rgba(244,67,54,0.2); color: #e57373; }
+        .da-pattern-id { font-size: 12px; color: rgba(255,255,255,0.3); }
+        .da-pattern-text {
+            font-size: 12px; color: rgba(255,255,255,0.45); font-style: italic;
+            margin-bottom: 8px; padding: 8px; background: rgba(255,255,255,0.03);
+            border-radius: 8px; border-left: 2px solid rgba(255,255,255,0.1);
+        }
+        .da-diagnosis { font-size: 13px; color: rgba(255,255,255,0.6); line-height: 1.5; margin-bottom: 6px; }
+        .da-fix {
+            font-size: 13px; color: #81c784; line-height: 1.5;
+            padding: 8px 12px; background: rgba(76,175,80,0.1);
+            border-radius: 8px; border-left: 3px solid rgba(76,175,80,0.4);
+        }
+        .da-fix-label { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: rgba(76,175,80,0.6); margin-bottom: 4px; font-weight: 600; }
+
+        /* Category confusion */
+        .da-confusion-row {
+            display: flex; align-items: center; gap: 10px; padding: 10px 14px;
+            background: rgba(0,0,0,0.3); border-radius: 10px; margin-bottom: 8px;
+            border: 1px solid rgba(255,255,255,0.06);
+        }
+        .da-conf-expected { font-size: 13px; font-weight: 600; color: #81c784; }
+        .da-conf-arrow { font-size: 14px; color: rgba(255,255,255,0.25); }
+        .da-conf-actual { font-size: 13px; font-weight: 600; color: #e57373; }
+        .da-conf-count { font-size: 11px; color: rgba(255,255,255,0.35); margin-left: auto; }
+
+        /* Severity drift */
+        .da-drift-card {
+            background: rgba(0,0,0,0.3); border-radius: 12px; padding: 16px;
+            margin-bottom: 10px; border: 1px solid rgba(255,255,255,0.08);
+        }
+        .da-drift-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+        .da-drift-dir {
+            font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 8px;
+        }
+        .da-drift-dir.over { background: rgba(244,67,54,0.2); color: #e57373; }
+        .da-drift-dir.under { background: rgba(255,152,0,0.2); color: #ffb74d; }
+        .da-drift-stat { font-size: 13px; color: rgba(255,255,255,0.5); }
+
+        /* Prompt fix cards */
+        .da-prompt-fix {
+            background: rgba(0,0,0,0.35); border: 1px solid rgba(108,99,255,0.2);
+            border-radius: 14px; padding: 18px; margin-bottom: 14px;
+        }
+        .da-pf-agent { font-size: 14px; font-weight: 700; color: #a5a0ff; margin-bottom: 4px; }
+        .da-pf-problem { font-size: 12px; color: rgba(255,255,255,0.5); margin-bottom: 12px; }
+        .da-pf-code {
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 12px; line-height: 1.6; color: #c5e1a5;
+            padding: 12px 14px; background: rgba(0,0,0,0.5);
+            border-radius: 10px; margin-bottom: 8px;
+            white-space: pre-wrap; word-break: break-word;
+            border: 1px solid rgba(76,175,80,0.15);
+        }
+        .da-pf-label {
+            font-size: 10px; text-transform: uppercase; letter-spacing: 1px;
+            color: rgba(255,255,255,0.3); margin-bottom: 6px; font-weight: 600;
+        }
+
+        /* Per-Agent Analysis Tabs */
+        .da-agent-tabs {
+            display: flex; gap: 0; margin-bottom: 0; border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .da-agent-tab {
+            flex: 1; padding: 10px 0; text-align: center; font-size: 12px; font-weight: 600;
+            color: rgba(255,255,255,0.35); cursor: pointer; border-bottom: 2px solid transparent;
+            transition: all 0.2s;
+        }
+        .da-agent-tab:hover { color: rgba(255,255,255,0.6); }
+        .da-agent-tab.active { color: #a5a0ff; border-bottom-color: #6c63ff; }
+        .da-agent-panel { display: none; padding-top: 16px; }
+        .da-agent-panel.active { display: block; }
+
+        /* Agent analysis header */
+        .da-agent-header {
+            background: rgba(0,0,0,0.3); border-radius: 14px; padding: 18px;
+            margin-bottom: 16px; border: 1px solid rgba(255,255,255,0.08);
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .da-agent-header-info { flex: 1; }
+        .da-agent-header-name { font-size: 15px; font-weight: 700; color: #fff; }
+        .da-agent-header-files { font-size: 11px; color: rgba(255,255,255,0.3); margin-top: 2px; }
+        .da-agent-header-score { font-size: 36px; font-weight: 800; }
+
+        /* Scenario bars for strengths/weaknesses */
+        .da-scenario-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px; }
+        .da-scenario-item {
+            background: rgba(0,0,0,0.25); border-radius: 10px; padding: 10px 14px;
+            border: 1px solid rgba(255,255,255,0.06);
+        }
+        .da-scenario-name { font-size: 12px; color: rgba(255,255,255,0.6); margin-bottom: 4px; font-weight: 600; }
+        .da-scenario-bar-bg { height: 6px; border-radius: 3px; background: rgba(255,255,255,0.08); overflow: hidden; }
+        .da-scenario-bar-fill { height: 100%; border-radius: 3px; transition: width 0.4s; }
+        .da-scenario-stat { font-size: 10px; color: rgba(255,255,255,0.35); margin-top: 3px; }
+
+        /* Download report button */
+        .da-download-row {
+            display: flex; gap: 10px; align-items: center; margin-top: 18px; margin-bottom: 6px;
+        }
+        .da-download-btn {
+            padding: 10px 22px; border: none; border-radius: 10px;
+            font-size: 13px; font-weight: 600; cursor: pointer;
+            background: linear-gradient(135deg, #6c63ff, #3f51b5);
+            color: #fff; transition: all 0.2s;
+            display: inline-flex; align-items: center; gap: 8px;
+        }
+        .da-download-btn:hover { box-shadow: 0 4px 15px rgba(108,99,255,0.4); }
+
+        /* ── Dataset Tab Styles ── */
+        .ds-toolbar { display: flex; gap: 10px; margin-bottom: 16px; flex-wrap: wrap; align-items: center; }
+        .ds-toolbar .btn { width: auto; flex: 0; min-width: 140px; margin-top: 0; }
+        .ds-count { font-size: 13px; color: rgba(255,255,255,0.4); margin-left: auto; }
+        .ds-table { width: 100%; border-collapse: collapse; }
+        .ds-table th, .ds-table td {
+            padding: 8px 6px; text-align: left; font-size: 12px;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+        .ds-table th {
+            font-size: 10px; text-transform: uppercase; letter-spacing: 1px;
+            color: rgba(255,255,255,0.35); font-weight: 600; position: sticky; top: 0;
+            background: rgba(0,0,0,0.6);
+        }
+        .ds-table td { color: rgba(255,255,255,0.7); }
+        .ds-table tr:hover td { background: rgba(255,255,255,0.03); }
+        .ds-table input, .ds-table select {
+            width: 100%; padding: 4px 6px; font-size: 12px;
+            background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 6px; color: #fff; outline: none;
+        }
+        .ds-table input:focus, .ds-table select:focus { border-color: #6c63ff; }
+        .ds-table select option { background: #1a1a2e; color: #fff; }
+        .ds-table textarea.ds-text-input {
+            width: 100%; min-height: 40px; padding: 4px 6px; font-size: 12px;
+            background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 6px; color: #fff; outline: none; resize: vertical;
+            font-family: inherit;
+        }
+        .ds-table textarea.ds-text-input:focus { border-color: #6c63ff; }
+        .ds-actions { display: flex; gap: 4px; }
+        .ds-btn-sm {
+            padding: 4px 10px; border: none; border-radius: 6px;
+            font-size: 11px; font-weight: 600; cursor: pointer;
+            transition: all 0.2s;
+        }
+        .ds-btn-save { background: rgba(76,175,80,0.2); color: #81c784; border: 1px solid rgba(76,175,80,0.3); }
+        .ds-btn-save:hover { background: rgba(76,175,80,0.35); }
+        .ds-btn-del { background: rgba(244,67,54,0.15); color: #e57373; border: 1px solid rgba(244,67,54,0.25); }
+        .ds-btn-del:hover { background: rgba(244,67,54,0.3); }
+        .ds-btn-cancel { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.5); border: 1px solid rgba(255,255,255,0.12); }
+        .ds-btn-cancel:hover { background: rgba(255,255,255,0.15); }
+        .ds-badge-safe { color: #81c784; font-weight: 600; }
+        .ds-badge-unsafe { color: #e57373; font-weight: 600; }
+        .ds-msg { font-size: 12px; padding: 8px 14px; border-radius: 8px; margin-bottom: 12px; display: none; }
+        .ds-msg.success { display: block; background: rgba(76,175,80,0.15); color: #81c784; border: 1px solid rgba(76,175,80,0.3); }
+        .ds-msg.error { display: block; background: rgba(244,67,54,0.15); color: #e57373; border: 1px solid rgba(244,67,54,0.25); }
+        .ds-scroll { max-height: 500px; overflow-y: auto; border-radius: 14px; }
+        .ds-row-editing td { background: rgba(108,99,255,0.05); }
+        .ds-search {
+            flex: 1; min-width: 160px; padding: 8px 14px; border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.08);
+            color: #fff; font-size: 13px; outline: none;
+        }
+        .ds-search:focus { border-color: #6c63ff; }
+        .ds-search::placeholder { color: rgba(255,255,255,0.3); }
     </style>
 </head>
 <body>
@@ -230,6 +467,7 @@
     <div class="tabs">
         <div class="tab active" data-tab="analyze">Analyze</div>
         <div class="tab" data-tab="analytics">Evals</div>
+        <div class="tab" data-tab="dataset">Dataset</div>
     </div>
 
     <!-- ═══ Analyze Tab ═══ -->
@@ -278,10 +516,10 @@
     <div class="tab-content" id="tab-analytics">
         <div class="eval-controls">
             <select id="evalFilter">
-                <option value="quick">Quick Run (8 cases)</option>
-                <option value="all">All Cases (20)</option>
-                <option value="safe">Safe Only (5)</option>
-                <option value="unsafe">Unsafe Only (15)</option>
+                <option value="quick">Quick Run (10 cases)</option>
+                <option value="all">All Cases (50)</option>
+                <option value="safe">Safe Only (16)</option>
+                <option value="unsafe">Unsafe Only (34)</option>
             </select>
             <button class="btn btn-secondary" id="runEvalsBtn">Run Evaluations</button>
             <button class="btn btn-rerun" id="rerunFailsBtn" style="display:none;">Rerun Failures</button>
@@ -332,12 +570,83 @@
                             <th>Verdict</th>
                             <th>Category</th>
                             <th>Severity</th>
+                            <th>JSON</th>
+                            <th>Rewrite</th>
                             <th>Time</th>
                         </tr>
                     </thead>
                     <tbody id="evalTableBody"></tbody>
                 </table>
             </div>
+
+            <!-- Per-Agent Reports -->
+            <div class="agent-reports" id="agentReports" style="display:none;">
+                <div class="agent-reports-title">Per-Agent Performance Reports</div>
+                <div id="agentReportCards"></div>
+            </div>
+
+            <!-- Deep Analysis for Improving Instructions -->
+            <div class="deep-analysis" id="deepAnalysis" style="display:none;">
+                <div class="deep-analysis-title">Deep Analysis &mdash; How to Achieve 100% Accuracy</div>
+
+                <div class="da-summary-panel">
+                    <div class="da-summary-text" id="daSummary"></div>
+                    <div class="da-download-row">
+                        <button class="da-download-btn" id="downloadReportBtn" onclick="downloadReport()">
+                            &#x2B07; Download Report
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Per-Agent Tabs -->
+                <div class="da-agent-tabs">
+                    <div class="da-agent-tab active" data-da="agent1">Agent 1: Detector</div>
+                    <div class="da-agent-tab" data-da="agent2">Agent 2: Analyzer</div>
+                    <div class="da-agent-tab" data-da="agent3">Agent 3: Rewriter</div>
+                </div>
+
+                <!-- Agent 1 Panel -->
+                <div class="da-agent-panel active" id="da-agent1">
+                    <div id="daAgent1Content"></div>
+                </div>
+
+                <!-- Agent 2 Panel -->
+                <div class="da-agent-panel" id="da-agent2">
+                    <div id="daAgent2Content"></div>
+                </div>
+
+                <!-- Agent 3 Panel -->
+                <div class="da-agent-panel" id="da-agent3">
+                    <div id="daAgent3Content"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══ Dataset Tab ═══ -->
+    <div class="tab-content" id="tab-dataset">
+        <div class="ds-toolbar">
+            <input class="ds-search" id="dsSearch" type="text" placeholder="Search cases...">
+            <button class="btn btn-secondary" id="dsAddBtn" style="width:auto;flex:0;min-width:120px;margin-top:0;">+ Add Case</button>
+            <span class="ds-count" id="dsCount"></span>
+        </div>
+        <div class="ds-msg" id="dsMsg"></div>
+        <div class="ds-scroll">
+            <table class="ds-table">
+                <thead>
+                    <tr>
+                        <th style="width:36px">#</th>
+                        <th>Text</th>
+                        <th style="width:66px">Verdict</th>
+                        <th style="width:90px">Category</th>
+                        <th style="width:50px">Sev</th>
+                        <th style="width:90px">Scenario</th>
+                        <th style="width:80px">Notes</th>
+                        <th style="width:80px">Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="dsTableBody"></tbody>
+            </table>
         </div>
     </div>
 </div>
@@ -555,16 +864,24 @@ function renderEvalResults(data) {
         var verdict_txt = r.verdict_correct ? 'PASS' : 'FAIL';
         var cat_cls = r.category_correct === null ? 'badge-skip' : (r.category_correct ? 'badge-pass' : 'badge-fail');
         var cat_txt = r.category_correct === null ? '\u2014' : (r.category_correct ? 'PASS' : 'FAIL');
+        var cat_detail = r.expected_category ? ('expected: ' + r.expected_category + (r.actual_category ? ', got: ' + r.actual_category : '')) : '';
         var sev_cls = r.severity_in_range === null ? 'badge-skip' : (r.severity_in_range ? 'badge-pass' : 'badge-fail');
         var sev_txt = r.severity_in_range === null ? '\u2014' : (r.severity_in_range ? 'PASS' : 'FAIL');
+        var sev_detail = r.expected_severity_range ? ('range: ' + r.expected_severity_range + ', got: ' + (r.actual_severity !== null ? r.actual_severity : '?')) : '';
+        var json_cls = r.json_valid ? 'badge-pass' : (r.expected_verdict === 'safe' ? 'badge-skip' : 'badge-fail');
+        var json_txt = r.expected_verdict === 'safe' ? '\u2014' : (r.json_valid ? 'PASS' : 'FAIL');
+        var rew_cls = r.rewrite_ok === null ? 'badge-skip' : (r.rewrite_ok ? 'badge-pass' : 'badge-fail');
+        var rew_txt = r.rewrite_ok === null ? '\u2014' : (r.rewrite_ok ? 'PASS' : 'FAIL');
         tr.innerHTML =
             '<td>' + r.id + '</td>' +
             '<td style="max-width:220px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" title="' +
                 r.text.replace(/"/g,'&quot;') + '">' + r.text.substring(0,50) + (r.text.length > 50 ? '...' : '') + '</td>' +
             '<td>' + r.expected_verdict + '</td>' +
-            '<td class="' + verdict_cls + '">' + verdict_txt + '</td>' +
-            '<td class="' + cat_cls + '">' + cat_txt + '</td>' +
-            '<td class="' + sev_cls + '">' + sev_txt + '</td>' +
+            '<td class="' + verdict_cls + '" title="' + (r.actual_verdict || '') + '">' + verdict_txt + '</td>' +
+            '<td class="' + cat_cls + '" title="' + cat_detail + '">' + cat_txt + '</td>' +
+            '<td class="' + sev_cls + '" title="' + sev_detail + '">' + sev_txt + '</td>' +
+            '<td class="' + json_cls + '">' + json_txt + '</td>' +
+            '<td class="' + rew_cls + '">' + rew_txt + '</td>' +
             '<td>' + (r.elapsed ? r.elapsed.toFixed(1) + 's' : '\u2014') + '</td>';
         tbody.appendChild(tr);
     });
@@ -577,6 +894,376 @@ function renderEvalResults(data) {
     } else {
         rerunBtn.style.display = 'none';
     }
+
+    /* ── Render Agent Reports ── */
+    if (data.agent_reports && data.agent_reports.length > 0) {
+        document.getElementById('agentReports').style.display = 'block';
+        var cardsEl = document.getElementById('agentReportCards');
+        cardsEl.innerHTML = '';
+        data.agent_reports.forEach(function(agent, idx) {
+            var card = document.createElement('div');
+            var hasFails = agent.failed_cases && agent.failed_cases.length > 0;
+            card.className = 'agent-report-card ' + (hasFails ? 'has-fail' : 'all-pass');
+
+            var scoreVal, scoreHtml;
+            if (idx === 0) {
+                /* Agent 1: Detector */
+                scoreVal = agent.accuracy;
+                scoreHtml =
+                    '<div class="arc-metrics">' +
+                    '  <div class="arc-metric"><span class="arc-metric-val ' + metricCls(agent.accuracy) + '">' + agent.passed + '/' + agent.total + '</span> Correct</div>' +
+                    '  <div class="arc-metric"><span class="arc-metric-val ' + (agent.false_positives > 0 ? 'bad' : 'good') + '">' + agent.false_positives + '</span> False Positives</div>' +
+                    '  <div class="arc-metric"><span class="arc-metric-val ' + (agent.false_negatives > 0 ? 'bad' : 'good') + '">' + agent.false_negatives + '</span> False Negatives</div>' +
+                    '  <div class="arc-metric"><span class="arc-metric-val ' + (agent.errors > 0 ? 'bad' : 'good') + '">' + agent.errors + '</span> Errors</div>' +
+                    '</div>';
+            } else if (idx === 1) {
+                /* Agent 2: Analyzer */
+                var catAcc = agent.category_accuracy !== null ? agent.category_accuracy : null;
+                var sevAcc = agent.severity_accuracy !== null ? agent.severity_accuracy : null;
+                var jsonAcc = agent.json_accuracy !== null ? agent.json_accuracy : null;
+                var vals = [catAcc, sevAcc, jsonAcc].filter(function(v) { return v !== null; });
+                scoreVal = vals.length > 0 ? Math.round(vals.reduce(function(a,b){return a+b;},0) / vals.length) : null;
+                scoreHtml =
+                    '<div class="arc-metrics">' +
+                    '  <div class="arc-metric"><span class="arc-metric-val ' + metricCls(catAcc) + '">' + (catAcc !== null ? agent.category_passed + '/' + agent.category_total : 'N/A') + '</span> Category</div>' +
+                    '  <div class="arc-metric"><span class="arc-metric-val ' + metricCls(sevAcc) + '">' + (sevAcc !== null ? agent.severity_passed + '/' + agent.severity_total : 'N/A') + '</span> Severity</div>' +
+                    '  <div class="arc-metric"><span class="arc-metric-val ' + metricCls(jsonAcc) + '">' + (jsonAcc !== null ? agent.json_passed + '/' + agent.json_total : 'N/A') + '</span> JSON Valid</div>' +
+                    '</div>';
+            } else {
+                /* Agent 3: Rewriter */
+                scoreVal = agent.accuracy;
+                scoreHtml =
+                    '<div class="arc-metrics">' +
+                    '  <div class="arc-metric"><span class="arc-metric-val ' + metricCls(agent.accuracy) + '">' + agent.passed + '/' + agent.total + '</span> Rewrites OK</div>' +
+                    '</div>';
+            }
+
+            var scoreDisp = scoreVal !== null ? scoreVal.toFixed(1) + '%' : 'N/A';
+            var scoreClr = scoreVal !== null ? scoreColor(scoreVal) : 'rgba(255,255,255,0.3)';
+
+            var html =
+                '<div class="arc-header">' +
+                '  <div><div class="arc-name">' + agent.name + '</div><div class="arc-role">' + agent.role + '</div></div>' +
+                '  <div class="arc-score" style="color:' + scoreClr + '">' + scoreDisp + '</div>' +
+                '</div>' +
+                scoreHtml;
+
+            if (hasFails) {
+                html += '<div class="arc-failures"><div class="arc-failures-title">Failed Cases (' + agent.failed_cases.length + ')</div>';
+                agent.failed_cases.forEach(function(fc) {
+                    html +=
+                        '<div class="arc-fail-item">' +
+                        '  <span class="arc-fail-id">#' + fc.id + '</span>' +
+                        '  <span class="arc-fail-issue">' + fc.issue + '</span>' +
+                        '  <span class="arc-fail-text" title="' + fc.text.replace(/"/g,'&quot;') + '">' + fc.text + '</span>' +
+                        '</div>';
+                });
+                html += '</div>';
+            }
+
+            card.innerHTML = html;
+            cardsEl.appendChild(card);
+        });
+    } else {
+        document.getElementById('agentReports').style.display = 'none';
+    }
+
+    /* ── Render Deep Analysis ── */
+    _lastEvalData = data;
+    if (data.deep_analysis) {
+        renderDeepAnalysis(data.deep_analysis);
+    }
+}
+
+/* ── Deep Analysis Tab Switching ── */
+document.addEventListener('click', function(e) {
+    if (e.target.classList.contains('da-agent-tab')) {
+        document.querySelectorAll('.da-agent-tab').forEach(function(t) { t.classList.remove('active'); });
+        document.querySelectorAll('.da-agent-panel').forEach(function(p) { p.classList.remove('active'); });
+        e.target.classList.add('active');
+        document.getElementById('da-' + e.target.dataset.da).classList.add('active');
+    }
+});
+
+var _lastDeepAnalysis = null;
+var _lastEvalData = null;
+
+function renderDeepAnalysis(da) {
+    _lastDeepAnalysis = da;
+    var panel = document.getElementById('deepAnalysis');
+    panel.style.display = 'block';
+
+    document.getElementById('daSummary').textContent = da.summary || 'No analysis available.';
+
+    renderAgent1Analysis(da.agent1, document.getElementById('daAgent1Content'));
+    renderAgent2Analysis(da.agent2, document.getElementById('daAgent2Content'));
+    renderAgent3Analysis(da.agent3, document.getElementById('daAgent3Content'));
+}
+
+function renderAgent1Analysis(a, container) {
+    container.innerHTML = '';
+    if (!a) return;
+
+    /* Header with accuracy */
+    var clr = scoreColor(a.accuracy);
+    container.innerHTML +=
+        '<div class="da-agent-header">' +
+        '  <div class="da-agent-header-info">' +
+        '    <div class="da-agent-header-name">' + escHtml(a.agent_name) + '</div>' +
+        '    <div class="da-agent-header-files">' + escHtml(a.agent_file) + ' &bull; ' + escHtml(a.task_file) + '</div>' +
+        '  </div>' +
+        '  <div class="da-agent-header-score" style="color:' + clr + '">' + a.accuracy + '%</div>' +
+        '</div>';
+
+    /* Key metrics row */
+    container.innerHTML +=
+        '<div class="score-card-row">' +
+        '  <div class="score-card"><div class="sc-value" style="color:' + scoreColor(a.accuracy) + '">' + a.passed + '/' + a.total_cases + '</div><div class="sc-label">Correct</div></div>' +
+        '  <div class="score-card"><div class="sc-value" style="color:' + (a.false_positives > 0 ? '#e57373' : '#81c784') + '">' + a.false_positives + '</div><div class="sc-label">False Positives</div></div>' +
+        '  <div class="score-card"><div class="sc-value" style="color:' + (a.false_negatives > 0 ? '#e57373' : '#81c784') + '">' + a.false_negatives + '</div><div class="sc-label">False Negatives</div></div>' +
+        '  <div class="score-card"><div class="sc-value" style="color:' + (a.errors > 0 ? '#e57373' : '#81c784') + '">' + a.errors + '</div><div class="sc-label">Errors</div></div>' +
+        '</div>';
+
+    /* Scenario breakdown */
+    var allScenarios = (a.strength_areas || []).concat(a.weakness_areas || []);
+    if (allScenarios.length > 0) {
+        var scenHtml = '<div class="da-section"><div class="da-section-title">Accuracy by Scenario</div><div class="da-scenario-grid">';
+        allScenarios.sort(function(x,y){ return x.accuracy - y.accuracy; });
+        allScenarios.forEach(function(s) {
+            var barClr = scoreColor(s.accuracy);
+            scenHtml +=
+                '<div class="da-scenario-item">' +
+                '  <div class="da-scenario-name">' + escHtml(s.scenario) + '</div>' +
+                '  <div class="da-scenario-bar-bg"><div class="da-scenario-bar-fill" style="width:' + s.accuracy + '%;background:' + barClr + '"></div></div>' +
+                '  <div class="da-scenario-stat">' + s.passed + '/' + s.total + ' (' + s.accuracy + '%)</div>' +
+                '</div>';
+        });
+        scenHtml += '</div></div>';
+        container.innerHTML += scenHtml;
+    }
+
+    /* Failure details */
+    if (a.failure_details && a.failure_details.length > 0) {
+        var fdHtml = '<div class="da-section"><div class="da-section-title">Detection Failures <span class="da-count">' + a.failure_details.length + '</span></div>';
+        a.failure_details.forEach(function(fd) {
+            var typeCls = fd.type === 'FALSE_POSITIVE' ? 'fp' : 'fn';
+            var typeLabel = fd.type === 'FALSE_POSITIVE' ? 'False Positive' : 'False Negative';
+            fdHtml +=
+                '<div class="da-pattern-card">' +
+                '  <div class="da-pattern-header">' +
+                '    <span class="da-pattern-type ' + typeCls + '">' + typeLabel + '</span>' +
+                '    <span class="da-pattern-id">Case #' + fd.case_id + ' &bull; ' + escHtml(fd.scenario) + '</span>' +
+                '  </div>' +
+                '  <div class="da-pattern-text">"' + escHtml(fd.text) + '"</div>' +
+                '  <div class="da-diagnosis">' + escHtml(fd.diagnosis) + '</div>' +
+                '  <div class="da-fix"><div class="da-fix-label">Suggested Rule</div>' + escHtml(fd.suggested_rule) + '</div>' +
+                '</div>';
+        });
+        fdHtml += '</div>';
+        container.innerHTML += fdHtml;
+    }
+
+    /* Prompt suggestions */
+    renderPromptSuggestions(container, a.backstory_suggestions, a.task_prompt_suggestions, a.agent_file, a.task_file, 'agent1');
+}
+
+function renderAgent2Analysis(a, container) {
+    container.innerHTML = '';
+    if (!a) return;
+
+    var clr = scoreColor(a.accuracy);
+    container.innerHTML +=
+        '<div class="da-agent-header">' +
+        '  <div class="da-agent-header-info">' +
+        '    <div class="da-agent-header-name">' + escHtml(a.agent_name) + '</div>' +
+        '    <div class="da-agent-header-files">' + escHtml(a.agent_file) + ' &bull; ' + escHtml(a.task_file) + '</div>' +
+        '  </div>' +
+        '  <div class="da-agent-header-score" style="color:' + clr + '">' + a.accuracy + '%</div>' +
+        '</div>';
+
+    /* Sub-metrics */
+    container.innerHTML +=
+        '<div class="score-card-row">' +
+        '  <div class="score-card"><div class="sc-value" style="color:' + scoreColor(a.category_accuracy) + '">' + (a.category_accuracy !== null ? a.category_passed + '/' + a.category_total : 'N/A') + '</div><div class="sc-label">Category</div></div>' +
+        '  <div class="score-card"><div class="sc-value" style="color:' + scoreColor(a.severity_accuracy) + '">' + (a.severity_accuracy !== null ? a.severity_passed + '/' + a.severity_total : 'N/A') + '</div><div class="sc-label">Severity</div></div>' +
+        '  <div class="score-card"><div class="sc-value" style="color:' + scoreColor(a.json_accuracy) + '">' + (a.json_accuracy !== null ? a.json_passed + '/' + a.json_total : 'N/A') + '</div><div class="sc-label">JSON Valid</div></div>' +
+        '</div>';
+
+    /* Category confusion */
+    if (a.category_confusion && a.category_confusion.length > 0) {
+        var ccHtml = '<div class="da-section"><div class="da-section-title">Category Confusion <span class="da-count">' + a.category_confusion.length + '</span></div>';
+        a.category_confusion.forEach(function(cc) {
+            ccHtml +=
+                '<div class="da-confusion-row">' +
+                '  <span class="da-conf-expected">' + escHtml(cc.expected) + '</span>' +
+                '  <span class="da-conf-arrow">\u2192</span>' +
+                '  <span class="da-conf-actual">' + escHtml(cc.actual) + '</span>' +
+                '  <span class="da-conf-count">' + cc.count + ' case(s) — IDs: ' + cc.case_ids.join(', ') + '</span>' +
+                '</div>' +
+                '<div class="da-fix" style="margin-bottom:10px;"><div class="da-fix-label">Disambiguation Fix</div>' + escHtml(cc.fix) + '</div>';
+        });
+        ccHtml += '</div>';
+        container.innerHTML += ccHtml;
+    }
+
+    /* Severity drift */
+    if (a.severity_drift && a.severity_drift.length > 0) {
+        var sdHtml = '<div class="da-section"><div class="da-section-title">Severity Calibration Issues <span class="da-count">' + a.severity_drift.length + '</span></div>';
+        a.severity_drift.forEach(function(sd) {
+            var dirCls = sd.direction === 'OVER_RATING' ? 'over' : 'under';
+            var dirLabel = sd.direction === 'OVER_RATING' ? 'Over-Rating' : 'Under-Rating';
+            var casesHtml = '';
+            if (sd.cases) {
+                sd.cases.forEach(function(c) {
+                    casesHtml +=
+                        '<div style="font-size:12px;color:rgba(255,255,255,0.45);padding:4px 0;">' +
+                        '  #' + c.id + ': actual=' + c.actual + ', expected=' + c.expected_range +
+                        '  <span style="color:rgba(255,255,255,0.25)">|</span> ' +
+                        '  <span style="font-style:italic;">' + escHtml(c.text) + '</span> ' +
+                        '  <span style="color:rgba(255,255,255,0.2);">[' + escHtml(c.category || '') + ']</span>' +
+                        '</div>';
+                });
+            }
+            sdHtml +=
+                '<div class="da-drift-card">' +
+                '  <div class="da-drift-header">' +
+                '    <span class="da-drift-dir ' + dirCls + '">' + dirLabel + '</span>' +
+                '    <span class="da-drift-stat">' + sd.count + ' case(s), avg drift: ' + sd.avg_drift + ' pts</span>' +
+                '  </div>' +
+                casesHtml +
+                '  <div class="da-fix" style="margin-top:8px;"><div class="da-fix-label">Calibration Fix</div>' + escHtml(sd.fix) + '</div>' +
+                '</div>';
+        });
+        sdHtml += '</div>';
+        container.innerHTML += sdHtml;
+    }
+
+    /* Failure details */
+    if (a.failure_details && a.failure_details.length > 0) {
+        var fdHtml = '<div class="da-section"><div class="da-section-title">All Failures <span class="da-count">' + a.failure_details.length + '</span></div>';
+        a.failure_details.forEach(function(fd) {
+            var typeLabel = fd.type === 'WRONG_CATEGORY' ? 'Wrong Category' : (fd.type === 'SEVERITY_MISS' ? 'Severity Miss' : 'Invalid JSON');
+            var detail = '';
+            if (fd.type === 'WRONG_CATEGORY') detail = 'expected: ' + escHtml(fd.expected) + ', got: ' + escHtml(fd.actual);
+            else if (fd.type === 'SEVERITY_MISS') detail = 'expected: ' + escHtml(fd.expected_range) + ', got: ' + fd.actual;
+            fdHtml +=
+                '<div class="da-pattern-card">' +
+                '  <div class="da-pattern-header">' +
+                '    <span class="da-pattern-type fn">' + typeLabel + '</span>' +
+                '    <span class="da-pattern-id">Case #' + fd.case_id + ' &bull; ' + escHtml(fd.scenario) + '</span>' +
+                '  </div>' +
+                '  <div class="da-pattern-text">"' + escHtml(fd.text) + '"</div>' +
+                (detail ? '<div class="da-diagnosis">' + detail + '</div>' : '') +
+                '</div>';
+        });
+        fdHtml += '</div>';
+        container.innerHTML += fdHtml;
+    }
+
+    renderPromptSuggestions(container, a.backstory_suggestions, a.task_prompt_suggestions, a.agent_file, a.task_file, 'agent2');
+}
+
+function renderAgent3Analysis(a, container) {
+    container.innerHTML = '';
+    if (!a) return;
+
+    var clr = a.accuracy !== null ? scoreColor(a.accuracy) : 'rgba(255,255,255,0.3)';
+    var accDisp = a.accuracy !== null ? a.accuracy + '%' : 'N/A';
+    container.innerHTML +=
+        '<div class="da-agent-header">' +
+        '  <div class="da-agent-header-info">' +
+        '    <div class="da-agent-header-name">' + escHtml(a.agent_name) + '</div>' +
+        '    <div class="da-agent-header-files">' + escHtml(a.agent_file) + ' &bull; ' + escHtml(a.task_file) + '</div>' +
+        '  </div>' +
+        '  <div class="da-agent-header-score" style="color:' + clr + '">' + accDisp + '</div>' +
+        '</div>';
+
+    container.innerHTML +=
+        '<div class="score-card-row">' +
+        '  <div class="score-card"><div class="sc-value" style="color:' + clr + '">' + a.passed + '/' + a.total + '</div><div class="sc-label">Rewrites OK</div></div>' +
+        '</div>';
+
+    /* Scenario failure breakdown */
+    if (a.scenario_failures && Object.keys(a.scenario_failures).length > 0) {
+        var sfHtml = '<div class="da-section"><div class="da-section-title">Failures by Scenario</div><div class="da-scenario-grid">';
+        Object.keys(a.scenario_failures).forEach(function(scen) {
+            sfHtml +=
+                '<div class="da-scenario-item">' +
+                '  <div class="da-scenario-name">' + escHtml(scen) + '</div>' +
+                '  <div class="da-scenario-stat" style="color:#e57373;">' + a.scenario_failures[scen] + ' failure(s)</div>' +
+                '</div>';
+        });
+        sfHtml += '</div></div>';
+        container.innerHTML += sfHtml;
+    }
+
+    /* Failure details */
+    if (a.failure_details && a.failure_details.length > 0) {
+        var fdHtml = '<div class="da-section"><div class="da-section-title">Rewrite Failures <span class="da-count">' + a.failure_details.length + '</span></div>';
+        a.failure_details.forEach(function(fd) {
+            var typeLabel = fd.type === 'EMPTY_OR_TOO_SHORT' ? 'Empty/Short' : (fd.type === 'IDENTICAL_TO_ORIGINAL' ? 'Identical' : 'Low Quality');
+            fdHtml +=
+                '<div class="da-pattern-card">' +
+                '  <div class="da-pattern-header">' +
+                '    <span class="da-pattern-type fn">' + typeLabel + '</span>' +
+                '    <span class="da-pattern-id">Case #' + fd.case_id + ' &bull; ' + escHtml(fd.scenario) + '</span>' +
+                '  </div>' +
+                '  <div class="da-pattern-text">"' + escHtml(fd.text) + '"</div>' +
+                '  <div class="da-diagnosis">' + escHtml(fd.diagnosis) + '</div>' +
+                (fd.actual_rewrite ? '<div style="font-size:12px;color:#64b5f6;padding:6px 10px;background:rgba(33,150,243,0.08);border-radius:8px;margin-top:6px;"><strong>Got:</strong> "' + escHtml(fd.actual_rewrite) + '"</div>' : '') +
+                '</div>';
+        });
+        fdHtml += '</div>';
+        container.innerHTML += fdHtml;
+    }
+
+    renderPromptSuggestions(container, a.backstory_suggestions, a.task_prompt_suggestions, a.agent_file, a.task_file, 'agent3');
+}
+
+function renderPromptSuggestions(container, backstorySugs, taskSugs, agentFile, taskFile, agentKey) {
+    if ((!backstorySugs || backstorySugs.length === 0) && (!taskSugs || taskSugs.length === 0)) {
+        container.innerHTML +=
+            '<div class="da-fix" style="margin-top:12px;">' +
+            '  <div class="da-fix-label">Status</div>' +
+            '  All checks passed for this agent. No instruction changes needed.' +
+            '</div>';
+        return;
+    }
+
+    var html = '<div class="da-section"><div class="da-section-title">Suggested Fixes</div>';
+
+    if (backstorySugs && backstorySugs.length > 0) {
+        html += '<div class="da-prompt-fix">';
+        html += '<div class="da-pf-label">Add to Backstory (' + escHtml(agentFile) + ')</div>';
+        backstorySugs.forEach(function(s) {
+            html += '<div class="da-pf-code">' + escHtml(s) + '</div>';
+        });
+        html += '</div>';
+    }
+
+    if (taskSugs && taskSugs.length > 0) {
+        html += '<div class="da-prompt-fix">';
+        html += '<div class="da-pf-label">Add to Task Prompt (' + escHtml(taskFile) + ')</div>';
+        taskSugs.forEach(function(s) {
+            html += '<div class="da-pf-code">' + escHtml(s) + '</div>';
+        });
+        html += '</div>';
+    }
+
+    html += '</div>';
+    container.innerHTML += html;
+}
+
+function escHtml(str) {
+    if (!str) return '';
+    return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function metricCls(val) {
+    if (val === null || val === undefined) return '';
+    if (val >= 80) return 'good';
+    if (val >= 60) return 'warn';
+    return 'bad';
 }
 
 /* ── Rerun Failures ── */
@@ -633,6 +1320,219 @@ document.getElementById('rerunFailsBtn').addEventListener('click', function() {
         document.getElementById('evalRunning').style.display = 'none'; alert('Eval timed out.');
     };
     xhr.send('ids=' + encodeURIComponent(_failedIds.join(',')));
+});
+
+/* ── Download Report ── */
+function downloadReport() {
+    if (!_lastDeepAnalysis || !_lastEvalData) { alert('Run evals first.'); return; }
+    var da = _lastDeepAnalysis;
+    var ed = _lastEvalData;
+    var lines = [];
+    lines.push('HATE SPEECH GUARDIAN — EVAL REPORT');
+    lines.push('Generated: ' + new Date().toISOString());
+    lines.push('='.repeat(60));
+    lines.push('');
+    lines.push('OVERALL SCORE: ' + ed.overall_score.toFixed(1) + '%');
+    lines.push('Total Cases: ' + da.total_cases + ' | Safe: ' + da.total_safe + ' | Unsafe: ' + da.total_unsafe + ' | Failures: ' + da.total_failures);
+    lines.push('');
+    lines.push(da.summary);
+    lines.push('');
+
+    ['agent1','agent2','agent3'].forEach(function(key) {
+        var a = da[key];
+        if (!a) return;
+        lines.push('='.repeat(60));
+        lines.push(a.agent_name);
+        lines.push('Files: ' + a.agent_file + ' | ' + a.task_file);
+        lines.push('Accuracy: ' + a.accuracy + '%');
+        lines.push('');
+
+        if (a.failure_details && a.failure_details.length > 0) {
+            lines.push('FAILURES (' + a.failure_details.length + '):');
+            a.failure_details.forEach(function(fd) {
+                lines.push('  Case #' + fd.case_id + ' [' + (fd.type || fd.scenario) + '] ' + (fd.text || ''));
+                if (fd.diagnosis) lines.push('    Diagnosis: ' + fd.diagnosis);
+                if (fd.suggested_rule) lines.push('    Fix: ' + fd.suggested_rule);
+            });
+            lines.push('');
+        }
+
+        if (a.backstory_suggestions && a.backstory_suggestions.length > 0) {
+            lines.push('BACKSTORY SUGGESTIONS (' + a.agent_file + '):');
+            a.backstory_suggestions.forEach(function(s) { lines.push('  >> ' + s); });
+            lines.push('');
+        }
+        if (a.task_prompt_suggestions && a.task_prompt_suggestions.length > 0) {
+            lines.push('TASK PROMPT SUGGESTIONS (' + a.task_file + '):');
+            a.task_prompt_suggestions.forEach(function(s) { lines.push('  >> ' + s); });
+            lines.push('');
+        }
+    });
+
+    var blob = new Blob([lines.join('\n')], { type: 'text/plain' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = 'eval-report-' + new Date().toISOString().slice(0,10) + '.txt';
+    a.click();
+    URL.revokeObjectURL(url);
+}
+
+/* ── Dataset Tab ── */
+var _dsData = [];
+var _dsEditingId = null;
+
+function dsLoad() {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', '/dataset', true);
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            _dsData = JSON.parse(xhr.responseText);
+            dsRender();
+        }
+    };
+    xhr.send();
+}
+
+function dsRender(filter) {
+    var tbody = document.getElementById('dsTableBody');
+    tbody.innerHTML = '';
+    var q = (filter || document.getElementById('dsSearch').value || '').toLowerCase();
+    var shown = 0;
+    _dsData.forEach(function(c) {
+        if (q && c.text.toLowerCase().indexOf(q) === -1 &&
+            (c.scenario || '').toLowerCase().indexOf(q) === -1 &&
+            (c.notes || '').toLowerCase().indexOf(q) === -1 &&
+            (c.expected_category || '').toLowerCase().indexOf(q) === -1 &&
+            String(c.id).indexOf(q) === -1) return;
+        shown++;
+        var tr = document.createElement('tr');
+
+        if (_dsEditingId === c.id) {
+            tr.className = 'ds-row-editing';
+            tr.innerHTML =
+                '<td>' + c.id + '</td>' +
+                '<td><textarea class="ds-text-input" id="ds-edit-text">' + escHtml(c.text) + '</textarea></td>' +
+                '<td><select id="ds-edit-verdict"><option value="safe"' + (c.expected_verdict === 'safe' ? ' selected' : '') + '>safe</option><option value="unsafe"' + (c.expected_verdict === 'unsafe' ? ' selected' : '') + '>unsafe</option></select></td>' +
+                '<td><input id="ds-edit-cat" value="' + escHtml(c.expected_category || '') + '" placeholder="category"></td>' +
+                '<td><input id="ds-edit-minsev" type="number" min="1" max="10" value="' + (c.min_severity || '') + '" placeholder="min" style="width:46%;display:inline-block;"> <input id="ds-edit-maxsev" type="number" min="1" max="10" value="' + (c.max_severity || '') + '" placeholder="max" style="width:46%;display:inline-block;"></td>' +
+                '<td><input id="ds-edit-scenario" value="' + escHtml(c.scenario || '') + '"></td>' +
+                '<td><input id="ds-edit-notes" value="' + escHtml(c.notes || '') + '"></td>' +
+                '<td class="ds-actions">' +
+                '  <button class="ds-btn-sm ds-btn-save" onclick="dsSave(' + c.id + ')">Save</button>' +
+                '  <button class="ds-btn-sm ds-btn-cancel" onclick="dsCancel()">Cancel</button>' +
+                '</td>';
+        } else {
+            var vcls = c.expected_verdict === 'safe' ? 'ds-badge-safe' : 'ds-badge-unsafe';
+            var sevTxt = (c.min_severity !== null && c.max_severity !== null) ? c.min_severity + '-' + c.max_severity : '\u2014';
+            tr.innerHTML =
+                '<td style="color:rgba(255,255,255,0.3)">' + c.id + '</td>' +
+                '<td style="max-width:220px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" title="' + escHtml(c.text) + '">' + escHtml(c.text.substring(0,60)) + (c.text.length > 60 ? '...' : '') + '</td>' +
+                '<td class="' + vcls + '">' + c.expected_verdict + '</td>' +
+                '<td>' + escHtml(c.expected_category || '\u2014') + '</td>' +
+                '<td>' + sevTxt + '</td>' +
+                '<td>' + escHtml(c.scenario || '\u2014') + '</td>' +
+                '<td style="max-width:80px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" title="' + escHtml(c.notes || '') + '">' + escHtml((c.notes || '').substring(0,20)) + '</td>' +
+                '<td class="ds-actions">' +
+                '  <button class="ds-btn-sm ds-btn-save" onclick="dsEdit(' + c.id + ')">Edit</button>' +
+                '  <button class="ds-btn-sm ds-btn-del" onclick="dsDelete(' + c.id + ')">Del</button>' +
+                '</td>';
+        }
+        tbody.appendChild(tr);
+    });
+    document.getElementById('dsCount').textContent = shown + ' of ' + _dsData.length + ' cases';
+}
+
+function dsEdit(id) {
+    _dsEditingId = id;
+    dsRender();
+}
+
+function dsCancel() {
+    _dsEditingId = null;
+    dsRender();
+}
+
+function dsSave(id) {
+    var payload = {
+        text: document.getElementById('ds-edit-text').value,
+        expected_verdict: document.getElementById('ds-edit-verdict').value,
+        expected_category: document.getElementById('ds-edit-cat').value || null,
+        min_severity: document.getElementById('ds-edit-minsev').value || null,
+        max_severity: document.getElementById('ds-edit-maxsev').value || null,
+        scenario: document.getElementById('ds-edit-scenario').value,
+        notes: document.getElementById('ds-edit-notes').value,
+    };
+    var xhr = new XMLHttpRequest();
+    xhr.open('PUT', '/dataset/' + id, true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.onload = function() {
+        var resp = JSON.parse(xhr.responseText);
+        if (resp.ok) {
+            _dsEditingId = null;
+            dsShowMsg('Case #' + id + ' saved.', 'success');
+            dsLoad();
+        } else {
+            dsShowMsg(resp.error || 'Save failed', 'error');
+        }
+    };
+    xhr.onerror = function() { dsShowMsg('Network error', 'error'); };
+    xhr.send(JSON.stringify(payload));
+}
+
+function dsDelete(id) {
+    if (!confirm('Delete case #' + id + '?')) return;
+    var xhr = new XMLHttpRequest();
+    xhr.open('DELETE', '/dataset/' + id, true);
+    xhr.onload = function() {
+        var resp = JSON.parse(xhr.responseText);
+        if (resp.ok) { dsShowMsg('Case #' + id + ' deleted.', 'success'); dsLoad(); }
+        else { dsShowMsg(resp.error || 'Delete failed', 'error'); }
+    };
+    xhr.onerror = function() { dsShowMsg('Network error', 'error'); };
+    xhr.send();
+}
+
+function dsAddNew() {
+    var payload = {
+        text: 'New test case text here',
+        expected_verdict: 'unsafe',
+        expected_category: '',
+        min_severity: null,
+        max_severity: null,
+        scenario: '',
+        notes: '',
+    };
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', '/dataset', true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.onload = function() {
+        var resp = JSON.parse(xhr.responseText);
+        if (resp.ok) {
+            dsShowMsg('Case #' + resp.case.id + ' added.', 'success');
+            dsLoad();
+            setTimeout(function() { _dsEditingId = resp.case.id; dsRender(); }, 200);
+        } else { dsShowMsg(resp.error || 'Add failed', 'error'); }
+    };
+    xhr.onerror = function() { dsShowMsg('Network error', 'error'); };
+    xhr.send(JSON.stringify(payload));
+}
+
+function dsShowMsg(text, type) {
+    var el = document.getElementById('dsMsg');
+    el.textContent = text;
+    el.className = 'ds-msg ' + type;
+    setTimeout(function() { el.className = 'ds-msg'; }, 4000);
+}
+
+document.getElementById('dsAddBtn').addEventListener('click', dsAddNew);
+document.getElementById('dsSearch').addEventListener('input', function() { dsRender(); });
+
+/* Load dataset when switching to Dataset tab */
+document.querySelectorAll('.tab').forEach(function(tab) {
+    tab.addEventListener('click', function() {
+        if (tab.dataset.tab === 'dataset' && _dsData.length === 0) dsLoad();
+    });
 });
 </script>
 </body>

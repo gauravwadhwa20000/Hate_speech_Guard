@@ -208,13 +208,13 @@ def print_summary(results: list[dict]):
 
 # ── CLI ───────────────────────────────────────────────────────────────────────
 
-QUICK_EVAL_IDS = {1, 4, 6, 8, 9, 10, 14, 17}
+QUICK_EVAL_IDS = {1, 4, 6, 8, 14, 26, 31, 36, 40, 48}
 
 
 def main():
     parser = argparse.ArgumentParser(description="Run evals for Hate Speech Guardian")
     parser.add_argument("--ids", nargs="+", type=int, help="Only run specific case IDs")
-    parser.add_argument("--quick", action="store_true", help="Run representative 8-case subset")
+    parser.add_argument("--quick", action="store_true", help="Run representative 10-case subset")
     parser.add_argument("--unsafe-only", action="store_true", help="Run only unsafe cases")
     parser.add_argument("--safe-only", action="store_true", help="Run only safe cases")
     parser.add_argument("--save", type=str, default=None, help="Save results to JSON file")

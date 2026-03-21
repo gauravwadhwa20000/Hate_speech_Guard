@@ -6,7 +6,8 @@
     "expected_category": null,
     "min_severity": null,
     "max_severity": null,
-    "notes": "Neutral positive statement"
+    "notes": "Neutral positive statement",
+    "scenario": "baseline-safe"
   },
   {
     "id": 2,
@@ -15,7 +16,8 @@
     "expected_category": null,
     "min_severity": null,
     "max_severity": null,
-    "notes": "Constructive civic opinion"
+    "notes": "Constructive civic opinion",
+    "scenario": "baseline-safe"
   },
   {
     "id": 3,
@@ -24,7 +26,8 @@
     "expected_category": null,
     "min_severity": null,
     "max_severity": null,
-    "notes": "Positive cross-cultural statement"
+    "notes": "Positive cross-cultural statement",
+    "scenario": "baseline-safe"
   },
   {
     "id": 4,
@@ -33,7 +36,8 @@
     "expected_category": null,
     "min_severity": null,
     "max_severity": null,
-    "notes": "Balanced political statement"
+    "notes": "Balanced political statement",
+    "scenario": "baseline-safe"
   },
   {
     "id": 5,
@@ -42,7 +46,8 @@
     "expected_category": null,
     "min_severity": null,
     "max_severity": null,
-    "notes": "Policy criticism without targeting a group"
+    "notes": "Policy criticism without targeting a group",
+    "scenario": "baseline-safe"
   },
   {
     "id": 6,
@@ -51,7 +56,8 @@
     "expected_category": "xenophobia",
     "min_severity": 6,
     "max_severity": 10,
-    "notes": "Explicit xenophobic generalization with call for action"
+    "notes": "Explicit xenophobic generalization with call for action",
+    "scenario": "explicit-hate"
   },
   {
     "id": 7,
@@ -60,7 +66,8 @@
     "expected_category": "sexism",
     "min_severity": 5,
     "max_severity": 9,
-    "notes": "Sexist stereotype about women in leadership"
+    "notes": "Sexist stereotype about women in leadership",
+    "scenario": "explicit-hate"
   },
   {
     "id": 8,
@@ -69,7 +76,8 @@
     "expected_category": "racism",
     "min_severity": 7,
     "max_severity": 10,
-    "notes": "Dehumanization — comparing people to animals"
+    "notes": "Dehumanization — comparing people to animals",
+    "scenario": "explicit-hate"
   },
   {
     "id": 9,
@@ -78,7 +86,8 @@
     "expected_category": "religious hatred",
     "min_severity": 7,
     "max_severity": 10,
-    "notes": "Religious hatred with sweeping generalization"
+    "notes": "Religious hatred with sweeping generalization",
+    "scenario": "explicit-hate"
   },
   {
     "id": 10,
@@ -87,7 +96,8 @@
     "expected_category": "homophobia",
     "min_severity": 6,
     "max_severity": 10,
-    "notes": "Explicit homophobia with call to restrict rights"
+    "notes": "Explicit homophobia with call to restrict rights",
+    "scenario": "explicit-hate"
   },
   {
     "id": 11,
@@ -96,7 +106,8 @@
     "expected_category": "ageism",
     "min_severity": 4,
     "max_severity": 8,
-    "notes": "Ageism — devaluing elderly people"
+    "notes": "Ageism — devaluing elderly people",
+    "scenario": "explicit-hate"
   },
   {
     "id": 12,
@@ -105,7 +116,8 @@
     "expected_category": "classism",
     "min_severity": 3,
     "max_severity": 7,
-    "notes": "Classism — stereotyping based on economic status"
+    "notes": "Classism — stereotyping based on economic status",
+    "scenario": "explicit-hate"
   },
   {
     "id": 13,
@@ -114,7 +126,8 @@
     "expected_category": "xenophobia",
     "min_severity": 5,
     "max_severity": 9,
-    "notes": "Coded xenophobic language / dog whistle"
+    "notes": "Coded xenophobic language / dog whistle",
+    "scenario": "coded-language"
   },
   {
     "id": 14,
@@ -123,7 +136,8 @@
     "expected_category": "racism",
     "min_severity": 3,
     "max_severity": 7,
-    "notes": "Sarcastic hate — irony masking racist intent"
+    "notes": "Sarcastic hate — irony masking racist intent",
+    "scenario": "sarcastic-hate"
   },
   {
     "id": 15,
@@ -132,7 +146,8 @@
     "expected_category": "ableism",
     "min_severity": 4,
     "max_severity": 8,
-    "notes": "Ableism — dismissing accommodations for disabled people"
+    "notes": "Ableism — dismissing accommodations for disabled people",
+    "scenario": "explicit-hate"
   },
   {
     "id": 16,
@@ -141,7 +156,8 @@
     "expected_category": "racism",
     "min_severity": 7,
     "max_severity": 10,
-    "notes": "Pseudoscientific racism"
+    "notes": "Pseudoscientific racism",
+    "scenario": "pseudoscience"
   },
   {
     "id": 17,
@@ -150,7 +166,8 @@
     "expected_category": "transphobia",
     "min_severity": 6,
     "max_severity": 10,
-    "notes": "Transphobia with calls for exclusion"
+    "notes": "Transphobia with calls for exclusion",
+    "scenario": "explicit-hate"
   },
   {
     "id": 18,
@@ -159,7 +176,8 @@
     "expected_category": "body shaming",
     "min_severity": 4,
     "max_severity": 8,
-    "notes": "Body shaming"
+    "notes": "Body shaming",
+    "scenario": "explicit-hate"
   },
   {
     "id": 19,
@@ -168,7 +186,8 @@
     "expected_category": "xenophobia",
     "min_severity": 8,
     "max_severity": 10,
-    "notes": "Incitement — call for mass deportation"
+    "notes": "Incitement — call for mass deportation",
+    "scenario": "incitement"
   },
   {
     "id": 20,
@@ -177,6 +196,317 @@
     "expected_category": "classism",
     "min_severity": 4,
     "max_severity": 8,
-    "notes": "Classism — blaming poverty on intelligence"
+    "notes": "Classism — blaming poverty on intelligence",
+    "scenario": "explicit-hate"
+  },
+  {
+    "id": 21,
+    "text": "Crime statistics show we need to invest more in education and social programs in underserved communities.",
+    "expected_verdict": "safe",
+    "expected_category": null,
+    "min_severity": null,
+    "max_severity": null,
+    "notes": "Uses word 'crime' near 'communities' but is constructive policy discussion",
+    "scenario": "borderline-safe"
+  },
+  {
+    "id": 22,
+    "text": "I'm concerned about the rising cost of living and how it affects working-class families.",
+    "expected_verdict": "safe",
+    "expected_category": null,
+    "min_severity": null,
+    "max_severity": null,
+    "notes": "Mentions class but is empathetic, not discriminatory",
+    "scenario": "borderline-safe"
+  },
+  {
+    "id": 23,
+    "text": "Different cultures have different approaches to education, and we can learn from each other.",
+    "expected_verdict": "safe",
+    "expected_category": null,
+    "min_severity": null,
+    "max_severity": null,
+    "notes": "Discusses cultural differences respectfully",
+    "scenario": "borderline-safe"
+  },
+  {
+    "id": 24,
+    "text": "My grandmother is 85 and still runs her own business — age is just a number.",
+    "expected_verdict": "safe",
+    "expected_category": null,
+    "min_severity": null,
+    "max_severity": null,
+    "notes": "Positive mention of age, anti-ageism sentiment",
+    "scenario": "borderline-safe"
+  },
+  {
+    "id": 25,
+    "text": "The disability rights movement has made important progress, but there's still work to do.",
+    "expected_verdict": "safe",
+    "expected_category": null,
+    "min_severity": null,
+    "max_severity": null,
+    "notes": "Mentions disability in advocacy context",
+    "scenario": "borderline-safe"
+  },
+  {
+    "id": 26,
+    "text": "I'm not racist, but those people just have a different way of thinking, if you know what I mean.",
+    "expected_verdict": "unsafe",
+    "expected_category": "racism",
+    "min_severity": 3,
+    "max_severity": 7,
+    "notes": "'I'm not racist but' preamble followed by coded othering",
+    "scenario": "coded-language"
+  },
+  {
+    "id": 27,
+    "text": "Some cultures are just more advanced than others, that's just how it is.",
+    "expected_verdict": "unsafe",
+    "expected_category": "racism",
+    "min_severity": 4,
+    "max_severity": 8,
+    "notes": "Cultural supremacy framed as neutral observation",
+    "scenario": "coded-language"
+  },
+  {
+    "id": 28,
+    "text": "I have nothing against them personally, I just don't think they should be allowed to marry.",
+    "expected_verdict": "unsafe",
+    "expected_category": "homophobia",
+    "min_severity": 5,
+    "max_severity": 9,
+    "notes": "Polite-sounding rights denial — coded homophobia",
+    "scenario": "coded-language"
+  },
+  {
+    "id": 29,
+    "text": "It's just biology — men are natural leaders and women are natural caregivers.",
+    "expected_verdict": "unsafe",
+    "expected_category": "sexism",
+    "min_severity": 4,
+    "max_severity": 8,
+    "notes": "Pseudoscientific sexism framed as biology",
+    "scenario": "pseudoscience"
+  },
+  {
+    "id": 30,
+    "text": "Studies show that certain ethnic groups just aren't suited for academic work.",
+    "expected_verdict": "unsafe",
+    "expected_category": "racism",
+    "min_severity": 7,
+    "max_severity": 10,
+    "notes": "Pseudoscientific racism disguised as academic claim",
+    "scenario": "pseudoscience"
+  },
+  {
+    "id": 31,
+    "text": "Wow, you're so articulate for someone from your background.",
+    "expected_verdict": "unsafe",
+    "expected_category": "racism",
+    "min_severity": 2,
+    "max_severity": 5,
+    "notes": "Backhanded compliment / microaggression",
+    "scenario": "microaggression"
+  },
+  {
+    "id": 32,
+    "text": "You speak English really well! Where are you actually from?",
+    "expected_verdict": "unsafe",
+    "expected_category": "xenophobia",
+    "min_severity": 1,
+    "max_severity": 4,
+    "notes": "Microaggression — implying someone doesn't belong",
+    "scenario": "microaggression"
+  },
+  {
+    "id": 33,
+    "text": "You don't look like an engineer. Are you sure you're in the right room?",
+    "expected_verdict": "unsafe",
+    "expected_category": "sexism",
+    "min_severity": 2,
+    "max_severity": 5,
+    "notes": "Gender-based microaggression in professional setting",
+    "scenario": "microaggression"
+  },
+  {
+    "id": 34,
+    "text": "These illegals are flooding our country and stealing our jobs and our women.",
+    "expected_verdict": "unsafe",
+    "expected_category": "xenophobia",
+    "min_severity": 7,
+    "max_severity": 10,
+    "notes": "Dehumanizing term + multiple harmful narratives (job theft, sexual threat)",
+    "scenario": "multi-target"
+  },
+  {
+    "id": 35,
+    "text": "Those welfare queens are just lazy immigrants popping out babies for free money.",
+    "expected_verdict": "unsafe",
+    "expected_category": "xenophobia",
+    "min_severity": 7,
+    "max_severity": 10,
+    "notes": "Intersectional hate — xenophobia + classism + sexism in one statement",
+    "scenario": "multi-target"
+  },
+  {
+    "id": 36,
+    "text": "The world would be better off without those people. Just saying.",
+    "expected_verdict": "unsafe",
+    "expected_category": "racism",
+    "min_severity": 8,
+    "max_severity": 10,
+    "notes": "Eliminationist rhetoric with 'just saying' deflection",
+    "scenario": "incitement"
+  },
+  {
+    "id": 37,
+    "text": "Someone needs to teach those people a lesson they won't forget.",
+    "expected_verdict": "unsafe",
+    "expected_category": "racism",
+    "min_severity": 7,
+    "max_severity": 10,
+    "notes": "Veiled threat of violence against an unnamed group",
+    "scenario": "incitement"
+  },
+  {
+    "id": 38,
+    "text": "I love how diverse my workplace is — we have people from all over the world.",
+    "expected_verdict": "safe",
+    "expected_category": null,
+    "min_severity": null,
+    "max_severity": null,
+    "notes": "Genuinely positive diversity statement — should not trigger false positive",
+    "scenario": "borderline-safe"
+  },
+  {
+    "id": 39,
+    "text": "The refugee crisis requires compassion and well-managed integration programs.",
+    "expected_verdict": "safe",
+    "expected_category": null,
+    "min_severity": null,
+    "max_severity": null,
+    "notes": "Discusses refugees constructively — sensitive topic, safe content",
+    "scenario": "borderline-safe"
+  },
+  {
+    "id": 40,
+    "text": "Not all traditions from every culture are positive — some practices need to evolve.",
+    "expected_verdict": "safe",
+    "expected_category": null,
+    "min_severity": null,
+    "max_severity": null,
+    "notes": "Nuanced cultural critique without targeting a group",
+    "scenario": "borderline-safe"
+  },
+  {
+    "id": 41,
+    "text": "Lol typical behavior from that community, am I right?",
+    "expected_verdict": "unsafe",
+    "expected_category": "racism",
+    "min_severity": 3,
+    "max_severity": 7,
+    "notes": "Casual stereotyping with social validation seeking",
+    "scenario": "casual-hate"
+  },
+  {
+    "id": 42,
+    "text": "No offense, but people like you just aren't cut out for this kind of work.",
+    "expected_verdict": "unsafe",
+    "expected_category": "sexism",
+    "min_severity": 3,
+    "max_severity": 7,
+    "notes": "'No offense' preamble with discriminatory gatekeeping",
+    "scenario": "casual-hate"
+  },
+  {
+    "id": 43,
+    "text": "I don't hate them, I just think they should stay in their own neighborhoods.",
+    "expected_verdict": "unsafe",
+    "expected_category": "racism",
+    "min_severity": 5,
+    "max_severity": 9,
+    "notes": "Segregationist sentiment disguised as neutral preference",
+    "scenario": "coded-language"
+  },
+  {
+    "id": 44,
+    "text": "She got the promotion because of diversity quotas, not because she's actually qualified.",
+    "expected_verdict": "unsafe",
+    "expected_category": "sexism",
+    "min_severity": 3,
+    "max_severity": 7,
+    "notes": "Undermining achievement via diversity dismissal — sexism + racism overlap",
+    "scenario": "coded-language"
+  },
+  {
+    "id": 45,
+    "text": "Hindu festivals are a beautiful celebration of culture and tradition.",
+    "expected_verdict": "safe",
+    "expected_category": null,
+    "min_severity": null,
+    "max_severity": null,
+    "notes": "Positive religious/cultural appreciation",
+    "scenario": "baseline-safe"
+  },
+  {
+    "id": 46,
+    "text": "I think both sides of the gun control debate make valid points worth discussing.",
+    "expected_verdict": "safe",
+    "expected_category": null,
+    "min_severity": null,
+    "max_severity": null,
+    "notes": "Balanced view on politically charged topic",
+    "scenario": "borderline-safe"
+  },
+  {
+    "id": 47,
+    "text": "Mental health awareness is important, and we should support people who struggle with it.",
+    "expected_verdict": "safe",
+    "expected_category": null,
+    "min_severity": null,
+    "max_severity": null,
+    "notes": "Supportive mental health statement — should not match ableism patterns",
+    "scenario": "borderline-safe"
+  },
+  {
+    "id": 48,
+    "text": "These people breed like rabbits and are taking over our country.",
+    "expected_verdict": "unsafe",
+    "expected_category": "racism",
+    "min_severity": 8,
+    "max_severity": 10,
+    "notes": "Dehumanization (breeding like animals) + replacement conspiracy",
+    "scenario": "explicit-hate"
+  },
+  {
+    "id": 49,
+    "text": "Why do we even let those savages into our country?",
+    "expected_verdict": "unsafe",
+    "expected_category": "xenophobia",
+    "min_severity": 7,
+    "max_severity": 10,
+    "notes": "Dehumanizing slur + exclusionary rhetoric",
+    "scenario": "explicit-hate"
+  },
+  {
+    "id": 50,
+    "text": "A woman's place is in the kitchen, not in the boardroom.",
+    "expected_verdict": "unsafe",
+    "expected_category": "sexism",
+    "min_severity": 5,
+    "max_severity": 9,
+    "notes": "Classic sexist trope restricting women's roles",
+    "scenario": "explicit-hate"
+  },
+  {
+    "id": 51,
+    "text": "New test case text here",
+    "expected_verdict": "unsafe",
+    "expected_category": null,
+    "min_severity": null,
+    "max_severity": null,
+    "notes": "",
+    "scenario": ""
   }
 ]
