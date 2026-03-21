@@ -78,7 +78,7 @@ If the Detector classifies the text as **safe**, the pipeline **short-circuits**
 
 <div align="center">
 
-<img src="assets/3-agents-pipeline.png" alt="Hate Speech Guardian — 3 Agent Pipeline (Detection → Analysis → Rewriting)" width="800">
+<img src="assets/All 3 agents.png" alt="Hate Speech Guardian — 3 Agent Pipeline (Detection → Analysis → Rewriting)" width="800">
 
 </div>
 
