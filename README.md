@@ -74,27 +74,17 @@ If the Detector classifies the text as **safe**, the pipeline **short-circuits**
 
 ---
 
-## 📸 Screenshots
+## 📸 Screenshot
 
-<!-- 
-  To add screenshots:
-  1. Create a "screenshots" folder in the project root
-  2. Take screenshots of the Analyze, Evals, and Dataset tabs
-  3. Save them as analyze-tab.png, evals-tab.png, dataset-tab.png
-  4. Uncomment the lines below
--->
+<div align="center">
 
-### Analyze Tab — Detect, Analyze & Rewrite in One Click
-<!-- ![Analyze Tab](screenshots/analyze-tab.png) -->
-> *Screenshot: Enter any text, click Analyze, and watch the 3 agents work sequentially — detection verdict, category breakdown with severity bar, toxic word highlights, and a respectful rewrite.*
+<img src="assets/3-agents-pipeline.png" alt="Hate Speech Guardian — 3 Agent Pipeline (Detection → Analysis → Rewriting)" width="800">
 
-### Evals Tab — Measure Every Agent's Performance
-<!-- ![Evals Tab](screenshots/evals-tab.png) -->
-> *Screenshot: Run 50 test cases, view weighted scores, per-agent accuracy reports, and deep analysis with copy-ready fix suggestions.*
+</div>
 
-### Dataset Tab — Edit Test Cases Live
-<!-- ![Dataset Tab](screenshots/dataset-tab.png) -->
-> *Screenshot: Search, add, edit, or delete eval test cases directly in the browser. Changes save to `evals/dataset.json` instantly.*
+> The three AI agents working in sequence — **Agent 1** decides if the text is safe or unsafe, **Agent 2** returns category, severity, intent, and toxic words as structured JSON, and **Agent 3** converts harmful text into a respectful alternative. Built with [CrewAI](https://crewai.com/) and [OpenRouter](https://openrouter.ai/).
+>
+> **See the full app in action?** [▶ Watch the demo video on YouTube](https://www.youtube.com/watch?v=xNqT8rf-5Jc)
 
 ---
 
