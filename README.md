@@ -1,336 +1,305 @@
-# 🚀 Hate Speech Guardian
+# Hate Speech Guardian
 
-A **production-style multi-agent AI moderation system** built with **CrewAI + OpenRouter + Flask** that:
+![GitHub stars](https://img.shields.io/github/stars/gauravwadhwa20000/hate-speech-guardian?style=social)
+![GitHub forks](https://img.shields.io/github/forks/gauravwadhwa20000/hate-speech-guardian?style=social)
+![GitHub issues](https://img.shields.io/github/issues/gauravwadhwa20000/hate-speech-guardian)
+![License](https://img.shields.io/github/license/gauravwadhwa20000/hate-speech-guardian)
+![Python](https://img.shields.io/badge/Python-3.11%2B-blue)
+![Built with CrewAI](https://img.shields.io/badge/Built%20With-CrewAI-purple)
+![LLM](https://img.shields.io/badge/Powered%20By-OpenRouter-green)
 
-✅ Detects hate speech
-✅ Analyzes category, severity, intent
-✅ Rewrites harmful content into respectful language
-✅ Evaluates itself with a structured scoring framework
+A multi-agent AI content moderation pipeline built with **CrewAI** and **Flask**.
+
+Three specialized AI agents collaborate to:
+- 🔍 Detect hate speech  
+- 🧠 Analyze intent, category, and severity  
+- ✨ Rewrite it into respectful language  
+
+All powered by **free LLMs via OpenRouter**.
 
 ---
 
 ## 🎥 Demo
 
-https://www.youtube.com/watch?v=xNqT8rf-5Jc
-
-
-## 📌 Why This Project Matters
-
-Most AI moderation systems rely on **a single prompt**, which leads to:
-
-* Inconsistent outputs
-* Poor handling of nuance (sarcasm, coded language)
-* No measurable performance
-
-This project solves that by building a **modular AI pipeline** with:
-
-* Specialized agents
-* Structured outputs (JSON)
-* A built-in evaluation system
+👉 https://www.youtube.com/watch?v=xNqT8rf-5Jc
 
 ---
 
-## 🧠 System Architecture
+## 🔥 Why This Project Stands Out
 
-```text
-User Input
-   │
-   ▼
-[Agent 1: Detector]
-   │
-   ├── Safe → Return immediately
-   │
-   ▼
-[Agent 2: Analyzer]
-   ▼
-[Agent 3: Rewriter]
-   ▼
-Final Structured JSON Response
-```
+- 🤖 **Multi-Agent AI System** (not just prompts)
+- 📊 **Evaluation-driven development**
+- 🧠 **Structured JSON outputs (production-ready)**
+- 💸 **Runs on FREE LLMs**
+- ⚡ **Optimized pipeline (short-circuit + caching)**
+- 🧪 **50 test cases + deep diagnostics**
 
 ---
 
-## 🤖 Agents Explained
+## 📚 Table of Contents
 
-### 🛡️ Detector Agent
-
-* Classifies input as `safe` or `unsafe`
-* Detects:
-
-  * Slurs
-  * Generalizations
-  * Coded language
-  * Sarcasm
-  * Threats
-
----
-
-### 🔍 Analyzer Agent
-
-```json
-{
-  "category": "racism",
-  "severity": 7,
-  "intent": "harmful",
-  "target_group": "...",
-  "confidence": 9,
-  "toxic_words": ["..."]
-}
-```
+- [Project Overview](#project-overview)
+- [Architecture](#architecture)
+- [How It Works](#how-it-works)
+- [Model](#model)
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Project Structure](#project-structure)
+- [Quick Start](#quick-start)
+- [Usage](#usage)
+- [Evaluations](#evaluations)
+- [Key Learnings](#key-learnings)
+- [Example Inputs](#example-inputs)
+- [License](#license)
 
 ---
 
-### ✍️ Rewriter Agent
+## 🚀 Project Overview
 
-```json
-{
-  "rewritten_text": "Respectful and constructive version"
-}
-```
+Online content moderation is hard:
+- Manual review → slow & expensive  
+- Single LLM → misses nuance  
 
----
+This project solves it using **3 specialized AI agents**:
 
-## ⚙️ Tech Stack
+1. **Detector** → Safe vs Unsafe  
+2. **Analyzer** → Category, severity, intent  
+3. **Rewriter** → Respectful transformation  
 
-| Component    | Technology   |
-| ------------ | ------------ |
-| AI Framework | CrewAI       |
-| LLM Gateway  | OpenRouter   |
-| Routing      | LiteLLM      |
-| Backend      | Flask        |
-| Language     | Python 3.11+ |
+Plus:
+- Full **evaluation framework**
+- **Per-agent diagnostics**
+- **Dataset editor + reports**
 
 ---
 
-## 🚀 Quick Start
+## 🏗 Architecture
 
-### 1. Clone the Repository
+```mermaid
+flowchart TD
+    A[User Input - Web UI] --> B[Flask Backend]
+    B --> C[Agent 1: Detector]
 
-```bash
-git clone https://github.com/gauravwadhwa20000/Hate_speech_Guard.git
-cd Hate_speech_Guard
-```
+    C -->|Safe| H[Return Response]
+    C -->|Unsafe| D[Agent 2: Analyzer]
 
----
+    D --> E[Structured JSON]
+    E --> F[Agent 3: Rewriter]
+    F --> G[Respectful Output]
 
-### 2. Setup Environment
+    G --> H[Final Response]
 
-```bash
-python -m venv venv
-```
-
-Activate:
-
-```bash
-# Mac/Linux
-source venv/bin/activate
-
-# Windows
-venv\Scripts\activate
-```
+    subgraph LLM Layer (OpenRouter)
+        C
+        D
+        F
+    end
+````
 
 ---
 
-### 3. Install Dependencies
-
-```bash
-pip install -r requirements.txt
-```
-
----
-
-## 🔑 Setup OpenRouter
-
-1. Get API key: [https://openrouter.ai/keys](https://openrouter.ai/keys)
-2. Create `.env`:
-
-```env
-OPENROUTER_API_KEY=your_key_here
-```
-
----
-
-## ▶️ Run Locally
-
-```bash
-python app.py
-```
-
-Open:
+## ⚙️ How It Works
 
 ```
-http://127.0.0.1:5000
+User Input → Detector → Analyzer → Rewriter → UI
 ```
 
----
-
-## 🏗️ How This Was Built
-
-### 1. Problem Breakdown
-
-Split moderation into:
-
-* Detection
-* Analysis
-* Rewriting
+* If **safe** → pipeline stops early
+* If **unsafe** → full pipeline executes
 
 ---
 
-### 2. Agent Design
+## 🧠 Model
 
-Each agent:
+All agents use:
 
-* Single responsibility
-* Clear role
-* Structured output
-
----
-
-### 3. Task Engineering
-
-* Strict JSON outputs
-* Defined taxonomy + severity rules
-
----
-
-### 4. Pipeline Execution
-
-* Sequential flow
-* Short-circuit for safe content
-* JSON parsing + fallback
-
----
-
-### 5. Evaluation Layer
-
-* Dataset (50 cases)
-* Weighted scoring system
-* Per-agent analysis
-
----
-
-## 📊 Evaluation System
-
-### Metrics
-
-| Metric             | Weight |
-| ------------------ | ------ |
-| Verdict Accuracy   | 30%    |
-| Category Accuracy  | 25%    |
-| Severity Alignment | 15%    |
-| JSON Validity      | 15%    |
-| Rewrite Quality    | 15%    |
-
----
-
-### Run Evaluations
-
-```bash
-python -m evals.runner
+```
+arcee-ai/trinity-large-preview:free
 ```
 
----
-
-## 📊 Severity Scale
-
-| Score | Meaning        |
-| ----- | -------------- |
-| 1–2   | Mild           |
-| 3–4   | Bias           |
-| 5–6   | Explicit hate  |
-| 7–8   | Dehumanization |
-| 9–10  | Violence       |
+| Agent    | Role                | Strength        |
+| -------- | ------------------- | --------------- |
+| Detector | Classification      | Fast + accurate |
+| Analyzer | JSON structuring    | Reliable output |
+| Rewriter | Text transformation | Clean rewrites  |
 
 ---
 
 ## ✨ Features
 
-* Multi-agent AI pipeline
-* Structured JSON outputs
-* Hate speech classification
-* Severity scoring
+### 🔹 Pipeline
+
+* Multi-agent orchestration (CrewAI)
+* 11-rule hate detection
+* Category classification
+* Severity scoring (1–10)
+* Intent + confidence detection
+* Toxic word highlighting
 * Respectful rewriting
-* Evaluation framework
-* Dataset support
-* Retry handling
-* Web UI
+* Retry with exponential backoff
+
+### 🔹 Evaluation System
+
+* 50 labeled test cases
+* Weighted scoring system
+* Per-agent deep analysis
+* Dataset editor (UI)
+* Downloadable reports
+* Disk caching
+* Quick run + rerun failures
 
 ---
 
-## 🧪 Example
+## 🛠 Tech Stack
 
-**Input**
+| Layer        | Tool         |
+| ------------ | ------------ |
+| AI Framework | CrewAI       |
+| LLM Routing  | LiteLLM      |
+| LLM Gateway  | OpenRouter   |
+| Backend      | Flask        |
+| Language     | Python 3.11+ |
+| Frontend     | HTML/CSS/JS  |
 
-```text
-People from that country are all criminals.
+---
+
+## 📁 Project Structure
+
 ```
-
-**Output**
-
-```json
-{
-  "verdict": "unsafe",
-  "category": "xenophobia",
-  "severity": 7,
-  "rewritten_text": "We should avoid generalizing people based on nationality."
-}
-```
-
----
-
-## 🔧 Customization
-
-* Change model → `agents.py`
-* Modify prompts → `tasks.py`
-* Extend dataset → `evals/dataset.json`
-* Add new agents
-
----
-
-## 📂 Project Structure
-
-```text
 hate-speech-guardian/
 ├── app.py
 ├── agents.py
 ├── tasks.py
 ├── evals/
+│   ├── runner.py
+│   ├── dataset.json
+│   └── cache.json
 ├── templates/
-├── assets/            # 👈 add architecture image here
-├── .env.example
 ├── requirements.txt
 └── README.md
 ```
 
 ---
 
-## 🧠 Key Learnings
+## ⚡ Quick Start
 
-* Multi-agent systems improve reliability
-* Structured outputs reduce failures
-* Evaluation is critical
-* Model choice > prompt length
-* Rate limits require handling
+### 1. Clone Repo
+
+```bash
+git clone https://github.com/gauravwadhwa20000/hate-speech-guardian.git
+cd hate-speech-guardian
+```
+
+### 2. Setup Environment
+
+```bash
+python -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+```
+
+### 3. Add API Key
+
+```
+OPENROUTER_API_KEY=your_key
+```
+
+### 4. Run App
+
+```bash
+python app.py
+```
+
+👉 Open: [http://127.0.0.1:5000](http://127.0.0.1:5000)
 
 ---
 
-## 📜 License
+## 🖥 Usage
 
-MIT License
+### Analyze Tab
+
+* Input text
+* View detection, analysis, rewrite
+
+### Evals Tab
+
+* Run test cases
+* View accuracy + diagnostics
+
+### Dataset Tab
+
+* Edit / add / delete cases
+
+---
+
+## 📈 Evaluations
+
+| Metric   | Weight |
+| -------- | ------ |
+| Verdict  | 30%    |
+| Category | 25%    |
+| Severity | 15%    |
+| JSON     | 15%    |
+| Rewrite  | 15%    |
+
+Run:
+
+```bash
+python -m evals.runner
+python -m evals.runner --quick
+```
+
+---
+
+## 🧠 Key Learnings
+
+* Multi-agent systems need optimization
+* Evals > intuition
+* Model choice > prompt size
+* JSON > regex
+* Caching is critical
+* Per-agent debugging is powerful
+
+---
+
+## 🧪 Example Inputs
+
+| Input        | Output                    |
+| ------------ | ------------------------- |
+| Neutral text | ✅ Safe                    |
+| Hate speech  | ❌ Categorized + rewritten |
 
 ---
 
 ## ⭐ Support
 
-If you found this useful:
+If you find this useful:
 
-* ⭐ Star the repo
-* 🔁 Share it
-* 🛠️ Build on top of it
+* Star ⭐ the repo
+* Fork 🍴 and experiment
+* Share 🚀 with AI builders
 
 ---
 
-## 🙌 Contributing
+## 📄 License
 
-Pull requests are welcome!
+MIT License
 
+```
+
+---
+
+# 🔥 What You Now Have
+
+This version is:
+- ✅ Clean + structured  
+- ✅ Recruiter-friendly  
+- ✅ Developer-friendly  
+- ✅ Viral-ready  
+- ✅ Production-grade  
+
+---
+
+If you want next step (high impact):
+👉 I can turn this into a **LinkedIn viral post + thumbnail + caption strategy** that drives traffic to your repo.
+```
