@@ -17,8 +17,6 @@
 
 Want to see the project in action before cloning? Watch the full walkthrough:
 
-[![Hate Speech Guardian Demo](https://img.youtube.com/vi/xNqT8rf-5Jc/maxresdefault.jpg)](https://www.youtube.com/watch?v=xNqT8rf-5Jc)
-
 > **[▶ Watch on YouTube](https://www.youtube.com/watch?v=xNqT8rf-5Jc)** — covers the architecture, live demo, evaluation framework, and how each agent works.
 
 ---
