@@ -368,7 +368,7 @@ Each diagnosis includes **copy-ready suggested text** for both `agents.py` and `
 
 ---
 
-## 🔨 How We Built It — Step by Step
+## 🔨 How i Built It — Step by Step
 
 Here's the process we followed to build this project from scratch:
 
