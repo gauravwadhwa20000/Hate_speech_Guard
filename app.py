@@ -13,6 +13,7 @@ load_dotenv(Path(__file__).resolve().parent / ".env")
 
 from agents import hate_speech_detector, hate_speech_analyzer, content_rewriter
 from tasks import create_detection_task, create_analysis_task, create_rewrite_task
+from keep_alive import start_keep_alive
 
 # ── Configuration ─────────────────────────────────────────────────────────────
 
@@ -28,6 +29,9 @@ EVAL_DELAY = 2                   # seconds between eval cases to respect rate li
 QUICK_EVAL_IDS = {1, 4, 6, 8, 14, 26, 31, 36, 40, 48}
 
 app = Flask(__name__)
+
+# Start background keep-alive pinger (prevents Render free-tier sleep)
+start_keep_alive()
 
 logging.basicConfig(
     level=logging.INFO,
@@ -525,7 +529,7 @@ def _compute_deep_analysis(results):
             ),
         })
     for r in false_negatives:
-        exp_cat = r.get("expected_category", "unknown")
+        exp_cat = r.get("expected_category") or "unknown"
         det_failure_details.append({
             "case_id": r["id"],
             "type": "FALSE_NEGATIVE",
