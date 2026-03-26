@@ -572,7 +572,7 @@ def _compute_deep_analysis(results):
     det_task_suggestions = []
 
     if false_negatives:
-        missed_cats = list(set(r.get("expected_category", "unknown") for r in false_negatives))
+        missed_cats = list(set((r.get("expected_category") or "unknown") for r in false_negatives))
         missed_scenarios = list(set(r.get("scenario", "unknown") for r in false_negatives))
         det_backstory_suggestions.append(
             f"You are especially vigilant about detecting: {', '.join(missed_cats)}. "
@@ -678,7 +678,7 @@ def _compute_deep_analysis(results):
     # Category confusion matrix
     confusion_pairs = {}
     for r in category_mismatches:
-        exp = r.get("expected_category", "unknown").lower()
+        exp = (r.get("expected_category") or "unknown").lower()
         act = (r.get("actual_category") or "unknown").lower()
         pair_key = f"{exp} -> {act}"
         if pair_key not in confusion_pairs:
@@ -716,7 +716,7 @@ def _compute_deep_analysis(results):
                 "id": r["id"], "text": r["text"][:80],
                 "actual": actual_sev, "expected_range": exp_range,
                 "scenario": r.get("scenario", "unknown"),
-                "category": r.get("expected_category", "unknown"),
+                "category": r.get("expected_category") or "unknown",
             }
             if actual_sev > max_s:
                 entry["drift"] = actual_sev - max_s
